@@ -8,13 +8,31 @@ namespace Practia.Bar.Model
     public class Reserva
     {
         private DateTime _fechaYHora;
+        private Cliente _cliente;
+        private string _nombreReserva;
+        private Mesa _mesa;
 
+        // CONSTRUCTORES
+        public Reserva(string nombreReserva, DateTime fecha, Mesa mesa)
+        {
+            NombreReserva = nombreReserva;
+            FechaYHora = fecha;
+            Mesa = mesa;
+        }
+
+        public Reserva(Cliente cliente, DateTime fecha, Mesa mesa)
+        {
+            Cliente = cliente;
+            FechaYHora = fecha;
+            Mesa = mesa;
+        }
+
+        // GETTERS AND SETTERS
         public DateTime FechaYHora
         {
             get { return _fechaYHora; }
             set { _fechaYHora = value; }
         }
-        private Cliente _cliente;
 
         public Cliente Cliente
         {
@@ -22,17 +40,22 @@ namespace Practia.Bar.Model
             set { _cliente = value; }
         }
 
-        public int NombreReserva
+        public string NombreReserva
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return _nombreReserva; }
+            set { _nombreReserva = value; }
         }
-  
-     
+
+        public Mesa Mesa
+        {
+            get { return _mesa; }
+            set { _mesa = value; }
+        }
+
+        public string Detalle()
+        {
+            return "Reserva a nombre de " + this.NombreReserva + " para la fecha de " + this.FechaYHora;
+        }
+
     }
 }

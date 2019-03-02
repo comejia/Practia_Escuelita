@@ -20,3 +20,14 @@ C:\repos\gitlab2\escuelita_tyd_201902\EjemploBar\Practia.Bar.WindowsApp\obj\Debu
 C:\repos\gitlab2\escuelita_tyd_201902\EjemploBar\Practia.Bar.WindowsApp\obj\Debug\Practia.Bar.WindowsApp.csproj.GenerateResource.Cache
 C:\repos\gitlab2\escuelita_tyd_201902\EjemploBar\Practia.Bar.WindowsApp\obj\Debug\Practia.Bar.WindowsApp.exe
 C:\repos\gitlab2\escuelita_tyd_201902\EjemploBar\Practia.Bar.WindowsApp\obj\Debug\Practia.Bar.WindowsApp.pdb
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.WindowsApp\bin\Debug\Practia.Bar.WindowsApp.exe.config
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.WindowsApp\bin\Debug\Practia.Bar.WindowsApp.exe
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.WindowsApp\bin\Debug\Practia.Bar.WindowsApp.pdb
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.WindowsApp\bin\Debug\Practia.Bar.Model.dll
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.WindowsApp\bin\Debug\Practia.Bar.Model.pdb
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.WindowsApp\obj\Debug\Practia.Bar.WindowsApp.csprojResolveAssemblyReference.cache
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.WindowsApp\obj\Debug\Practia.Bar.WindowsApp.MainForm.resources
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.WindowsApp\obj\Debug\Practia.Bar.WindowsApp.Properties.Resources.resources
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.WindowsApp\obj\Debug\Practia.Bar.WindowsApp.csproj.GenerateResource.Cache
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.WindowsApp\obj\Debug\Practia.Bar.WindowsApp.exe
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.WindowsApp\obj\Debug\Practia.Bar.WindowsApp.pdb

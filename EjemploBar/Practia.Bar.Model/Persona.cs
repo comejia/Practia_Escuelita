@@ -33,6 +33,24 @@ namespace Practia.Bar.Model
 
         public abstract string GetDescripcion();
 
+        public string Nombre
+        {
+            get { return _nombre; }
+            set { _nombre = value; }
+        }
+
+        public string Apellido
+        {
+            get { return _apellido; }
+            set { _apellido = value; }
+        }
+
+        public string DNI
+        {
+            get { return _dni; }
+            set { _dni = value; }
+        }
+
         public bool EstaVivo()
         {
             return true;

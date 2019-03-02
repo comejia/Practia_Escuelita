@@ -55,6 +55,7 @@
     <Compile Include="EjercicioTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BarTests.cs" />
+    <Compile Include="CasosUsoTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Practia.Bar.Model\Practia.Bar.Model.csproj">

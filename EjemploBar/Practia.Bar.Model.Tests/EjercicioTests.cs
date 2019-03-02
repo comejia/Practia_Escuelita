@@ -30,11 +30,6 @@ namespace Practia.Bar.Model.Tests
 
         }
 
-        [TestMethod]
-        public void Test_ReservarMesa_Viernes20hs_4personas_ReservaOK()
-        {
-            Assert.Fail("Test no implementado");
-        }
 
         [TestMethod]
         public void Test_AnalizarEficienciaUsoSalon_DiaEspecifico()

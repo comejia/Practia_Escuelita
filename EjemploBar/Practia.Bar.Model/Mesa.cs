@@ -13,7 +13,6 @@ namespace Practia.Bar.Model
         private int _cubiertos;
         private int _id;
         private EstadoMesa _estadoMesa;
-        private Reserva _reserva;
         private Mozo _mozo;
 
         private const string MESA_DESCRIPTCION_TEMPLATE = "Mesa número ";
@@ -27,25 +26,28 @@ namespace Practia.Bar.Model
 
             this._estadoMesa = EstadoMesa.Libre;
 
-            contadorMesas=contadorMesas+1;
+            contadorMesas = contadorMesas + 1;
             this._id = contadorMesas;
-        }
-
-        public Reserva Reserva
-        {
-            get { return _reserva; }
         }
 
         public int Cubiertos
         {
-            get 
-            {
-                return _cubiertos;
-            }
+            get { return _cubiertos; }
+        }
+
+        public EstadoMesa EstadoMesa
+        {
+            get;
+            set;
+        }
+
+        public int ID
+        {
+            get { return _id; }
         }
 
         public string Descripcion
-        { 
+        {
             get
             {
                 return MESA_DESCRIPTCION_TEMPLATE + this._id.ToString();
@@ -56,7 +58,7 @@ namespace Practia.Bar.Model
         {
             get
             {
-                if(this._mozo != null)
+                if (this._mozo != null)
                     return this._mozo;
                 else
                     //TODO: Es esta la forma mas piola de manejar al caso del mozo no asignado?
@@ -73,5 +75,6 @@ namespace Practia.Bar.Model
         {
             throw new System.NotImplementedException();
         }
+
     }
 }

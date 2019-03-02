@@ -7,3 +7,8 @@ C:\repos\gitlab2\escuelita_tyd_201902\EjemploBar\Practia.Bar.Model\bin\Debug\Pra
 C:\repos\gitlab2\escuelita_tyd_201902\EjemploBar\Practia.Bar.Model\bin\Debug\Practia.Bar.Model.pdb
 C:\repos\gitlab2\escuelita_tyd_201902\EjemploBar\Practia.Bar.Model\obj\Debug\Practia.Bar.Model.dll
 C:\repos\gitlab2\escuelita_tyd_201902\EjemploBar\Practia.Bar.Model\obj\Debug\Practia.Bar.Model.pdb
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.Model\bin\Debug\Practia.Bar.Model.dll
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.Model\bin\Debug\Practia.Bar.Model.pdb
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.Model\obj\Debug\Practia.Bar.Model.csprojResolveAssemblyReference.cache
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.Model\obj\Debug\Practia.Bar.Model.dll
+C:\Users\gquispe\Source\Repos\escuelita_tyd_2019022\EjemploBar\Practia.Bar.Model\obj\Debug\Practia.Bar.Model.pdb

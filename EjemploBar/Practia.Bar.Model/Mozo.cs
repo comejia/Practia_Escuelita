@@ -12,8 +12,6 @@ namespace Practia.Bar.Model
         {
         }
 
-
-
         public override string GetDescripcion()
         {
             return "Mozo: " + this._nombre + " " + this._apellido;
