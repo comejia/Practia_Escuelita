@@ -56,6 +56,11 @@ namespace Practia.Bar.Model
         {
             return "Reserva a nombre de " + this.NombreReserva + " para la fecha de " + this.FechaYHora;
         }
+        public void modificarMesaYFecha(Mesa mesa, DateTime fecha)
+        {
+            Mesa = mesa;
+            FechaYHora = fecha;
+        }
 
     }
 }

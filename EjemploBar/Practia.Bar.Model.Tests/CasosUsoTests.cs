@@ -54,10 +54,10 @@ namespace Practia.Bar.Model.Tests
 
             Assert.AreEqual(2, _bar.MesasDeNCubiertos(4, _bar.Mesas).Count);
             Assert.AreEqual(1, _bar.MesasReservadasEnUnaFecha(_bar._reservas, new DateTime(2013)).Count);
-            Assert.IsFalse(_bar.existeMesaDisponible(4, new DateTime(2012)));
+            Assert.IsFalse(_bar.ExisteMesaDisponible(4, new DateTime(2012)));
 
             _bar.Mesas.Add(new Mesa(4));
-            Assert.IsTrue(_bar.existeMesaDisponible(4, new DateTime(2012)));
+            Assert.IsTrue(_bar.ExisteMesaDisponible(4, new DateTime(2012)));
         }
 
 
@@ -87,12 +87,14 @@ namespace Practia.Bar.Model.Tests
         [TestMethod]
         public void Test_ReAgendarReserva_OK()
         {
-            Assert.Fail("Test no implementado");
-            /*         Cliente pablito = new Cliente("Pablito", "Perez", "378123643");
-                       DateTime fecha = new DateTime(2019, 03, 02, 20, 00, 00);
-                       _bar.Reservar(4, fecha, pablito);
-                       Reserva reservaVieja = new Reserva(pablito, fecha);
-           */
+            DateTime fecha = new DateTime(2019, 03, 02, 20, 00, 00);
+            Reserva reservaRealizada = _bar.Reservar(2, fecha, "pablito", "22333111");
+            Reserva reservaACambiar = _bar.BuscarReserva("pablito", fecha);
+
+            Mesa mesaNueva = _bar.ConseguirMesaDisponible(reservaACambiar.Mesa.Cubiertos + 3, fecha.AddHours(1));
+            reservaACambiar.modificarMesaYFecha(mesaNueva, reservaACambiar.FechaYHora.AddHours(1));
+
+            Assert.AreEqual(5, reservaACambiar.Mesa.Cubiertos);
         }
         /// <summary>
         /// Como cliente del bar quiero pedirle a un mozo que cierre mi mesa, que el mozo pida el cierre de la mesa al bar y 
@@ -103,6 +105,9 @@ namespace Practia.Bar.Model.Tests
         [TestMethod]
         public void Test_CierreDeMesa_yFacturacion_OK()
         {
+            Mesa mesaTest = _bar.Mesas[0];
+            mesaTest.MozoAsignado = _bar.Mozo[0];
+            mesaTest.Cerrar(_bar);
             Assert.Fail("Test no implementado");
         }
 

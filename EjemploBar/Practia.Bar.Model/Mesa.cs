@@ -14,6 +14,7 @@ namespace Practia.Bar.Model
         private int _id;
         private EstadoMesa _estadoMesa;
         private Mozo _mozo;
+        private Decimal _montoActual;
 
         private const string MESA_DESCRIPTCION_TEMPLATE = "Mesa número ";
 
@@ -64,11 +65,22 @@ namespace Practia.Bar.Model
                     //TODO: Es esta la forma mas piola de manejar al caso del mozo no asignado?
                     throw new System.Exception("Esta mesa no tiene un mozo asignado");
             }
+            set
+            {
+                _mozo = value;
+            }
         }
 
-        public Decimal Cerrar()
+        public Decimal MontoActual
         {
-            throw new System.NotImplementedException();
+            get { return _montoActual; }
+            set { _montoActual = value; }
+        }
+
+        public void Cerrar(Bar _bar)
+        {
+            EstadoMesa = EstadoMesa.PendienteFacturacion;
+            _mozo.generarFactura(_bar, this);
         }
 
         public void Ocupar()

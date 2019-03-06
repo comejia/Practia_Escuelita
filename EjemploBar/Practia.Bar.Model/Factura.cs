@@ -11,10 +11,24 @@ namespace Practia.Bar.Model
 
         private DateTime _fecha;
         private int _numeroFactura;
-        private int _montoTotal;
+        private Decimal _montoTotal;
         private Mesa _mesa;
         private Cliente _cliente;
         private Mozo _mozo;
+
+        public Factura(DateTime fecha, Mozo mozo, Mesa mesa, Decimal total)
+        {
+            if (mozo == null || mesa == null)
+                throw new Exception("La factura debe tener definido, un mozo y una mesa");
+            this._fecha = fecha;
+            this._mozo = mozo;
+            this._mesa = mesa;
+            this._montoTotal = total;
+
+            contadorFacturas = contadorFacturas + 1;
+            this._numeroFactura = contadorFacturas;
+
+        }
 
         public Factura(DateTime fecha, Cliente cliente, Mozo mozo, Mesa mesa, int total)
         {

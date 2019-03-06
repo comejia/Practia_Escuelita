@@ -41,43 +41,42 @@ namespace Practia.Bar.Model
             get { return _mesas; }
         }
 
-
-        /*
-        public Mesa Reservar(int cubiertos, DateTime fecha, Cliente cliente)
+        public List<Mozo> Mozo
         {
-            Mesa mesaDisponible = _mesas.Find
-                (mesa => mesa.Cubiertos == cubiertos &&
-                         mesa.estaDisponible(fecha)
-               );
-            Reserva resultadoReserva = new Reserva(cliente, fecha);
-            mesaDisponible.Reserva = resultadoReserva;
-            _listaReservas.Add(resultadoReserva);
-            return mesaDisponible;
-        }*/
+            get { return _mozos; }
+        }
+
 
         public Reserva Reservar(int cubiertos, DateTime fecha, string nombreCliente, string dni)
         {
-            if (existeMesaDisponible(cubiertos, fecha))
+            Mesa mesaBuscada = ConseguirMesaDisponible(cubiertos, fecha);
+
+            if (!mesaBuscada.Equals(null))
             {
-                List<Mesa> mesasDeNCubiertos = MesasDeNCubiertos(cubiertos, _mesas);
-
-                List<Mesa> mesasReservadasEnLaFecha = MesasReservadasEnUnaFecha(_reservas, fecha);
-                List<Mesa> mesasDeNCubiertosReservadas = MesasDeNCubiertos(cubiertos, mesasReservadasEnLaFecha);
-
-                Mesa mesaBuscada = mesasDeNCubiertos.Find(mesa => !mesasDeNCubiertosReservadas.Contains(mesa));
-
                 Reserva reservaRealizada = new Reserva(nombreCliente, fecha, mesaBuscada);
                 _reservas.Add(reservaRealizada);
+
                 return reservaRealizada;
             }
             else
             {
-                throw new System.Exception("No hay una mesa disponible con " + cubiertos.ToString() + " para esta fecha");
+                throw new System.Exception("No hay una mesa disponible con " + cubiertos.ToString() + " para la fecha " +
+                                            fecha + ".");
             }
 
         }
 
-        public bool existeMesaDisponible(int cubiertos, DateTime fecha)
+        public Mesa ConseguirMesaDisponible(int cubiertos, DateTime fecha)
+        {
+            List<Mesa> mesasDeNCubiertos = MesasDeNCubiertos(cubiertos, _mesas);
+
+            List<Mesa> mesasReservadasEnLaFecha = MesasReservadasEnUnaFecha(_reservas, fecha);
+            List<Mesa> mesasDeNCubiertosReservadas = MesasDeNCubiertos(cubiertos, mesasReservadasEnLaFecha);
+
+            return mesasDeNCubiertos.Find(mesa => !mesasDeNCubiertosReservadas.Contains(mesa));
+        }
+
+        public bool ExisteMesaDisponible(int cubiertos, DateTime fecha)
         {
             List<Mesa> mesasDeNCubiertos = MesasDeNCubiertos(cubiertos, _mesas);
 
@@ -101,6 +100,19 @@ namespace Practia.Bar.Model
         {
             List<Reserva> reservasDeLaFecha = reservas.FindAll(reserva => reserva.FechaYHora == fecha);
             return reservasDeLaFecha.ConvertAll<Mesa>(reserva => reserva.Mesa);
+        }
+
+        public Reserva BuscarReserva(string nombreReserva, DateTime fecha)
+        {
+            return _reservas.Find(reserva => reserva.NombreReserva == nombreReserva &&
+                                             reserva.FechaYHora == fecha);
+        }
+
+        public Factura GenerarFactura(Mesa mesa)
+        {
+            Factura facturaGenerada = new Factura(new DateTime().Date, mesa.MozoAsignado, mesa, mesa.MontoActual);
+            _facturas.Add(facturaGenerada);
+            return facturaGenerada;
         }
 
     }

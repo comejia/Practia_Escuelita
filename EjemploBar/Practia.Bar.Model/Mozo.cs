@@ -8,7 +8,7 @@ namespace Practia.Bar.Model
     public class Mozo : Persona
     {
 
-        public Mozo(string nombre, string apellido, string dni):base(nombre, apellido, dni)
+        public Mozo(string nombre, string apellido, string dni) : base(nombre, apellido, dni)
         {
         }
 
@@ -16,5 +16,16 @@ namespace Practia.Bar.Model
         {
             return "Mozo: " + this._nombre + " " + this._apellido;
         }
+
+        public void generarFactura(Bar bar, Mesa mesa)
+        {
+            bar.GenerarFactura(mesa);
+        }
+
+        public void cobrar(Mesa mesa)
+        {
+            mesa.EstadoMesa = EstadoMesa.Libre;
+        }
+
     }
 }
