@@ -30,13 +30,6 @@ namespace Practia.Bar.Model.Tests
 
         }
 
-
-        [TestMethod]
-        public void Test_AnalizarEficienciaUsoSalon_DiaEspecifico()
-        {
-            Assert.Fail("Test no implementado");
-        }
-
         [TestMethod]
         public void Test_AnalizarEficienciaUsoSalon_Historica()
         {

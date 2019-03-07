@@ -15,9 +15,11 @@ namespace Practia.Bar.Model
         private EstadoMesa _estadoMesa;
         private Mozo _mozo;
         private Decimal _montoActual;
+        private int _cubiertosUtilizados;
 
         private const string MESA_DESCRIPTCION_TEMPLATE = "Mesa número ";
 
+        // CONSTRUCTOR
         public Mesa(int cubiertos)
         {
             if (cubiertos < 10 && cubiertos > 0)
@@ -31,6 +33,7 @@ namespace Practia.Bar.Model
             this._id = contadorMesas;
         }
 
+        // GETTER AND SETTER
         public int Cubiertos
         {
             get { return _cubiertos; }
@@ -38,13 +41,19 @@ namespace Practia.Bar.Model
 
         public EstadoMesa EstadoMesa
         {
-            get;
-            set;
+            get { return _estadoMesa; }
+            set { _estadoMesa = value; }
         }
 
         public int ID
         {
             get { return _id; }
+        }
+
+        public int CubiertosUtilizados
+        {
+            get { return _cubiertosUtilizados; }
+            set { _cubiertosUtilizados = value; }
         }
 
         public string Descripcion
@@ -85,7 +94,7 @@ namespace Practia.Bar.Model
 
         public void Ocupar()
         {
-            throw new System.NotImplementedException();
+            EstadoMesa = EstadoMesa.Ocupado;
         }
 
     }

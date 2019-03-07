@@ -52,12 +52,12 @@ namespace Practia.Bar.Model.Tests
             _bar._reservas.Add(new Reserva("german", new DateTime(2012), mesa_2_4Cubiertos));
             _bar._reservas.Add(new Reserva("german", new DateTime(2013), _bar.Mesas[2]));
 
-            Assert.AreEqual(2, _bar.MesasDeNCubiertos(4, _bar.Mesas).Count);
+            Assert.AreEqual(4, _bar.MesasDeMinNCubiertos(4, _bar.Mesas).Count);
             Assert.AreEqual(1, _bar.MesasReservadasEnUnaFecha(_bar._reservas, new DateTime(2013)).Count);
-            Assert.IsFalse(_bar.ExisteMesaDisponible(4, new DateTime(2012)));
+            Assert.IsFalse(_bar.ExisteMesaDisponible(9, new DateTime(2012)));
 
-            _bar.Mesas.Add(new Mesa(4));
-            Assert.IsTrue(_bar.ExisteMesaDisponible(4, new DateTime(2012)));
+            _bar.Mesas.Add(new Mesa(9));
+            Assert.IsTrue(_bar.ExisteMesaDisponible(9, new DateTime(2012)));
         }
 
 
@@ -91,10 +91,9 @@ namespace Practia.Bar.Model.Tests
             Reserva reservaRealizada = _bar.Reservar(2, fecha, "pablito", "22333111");
             Reserva reservaACambiar = _bar.BuscarReserva("pablito", fecha);
 
-            Mesa mesaNueva = _bar.ConseguirMesaDisponible(reservaACambiar.Mesa.Cubiertos + 3, fecha.AddHours(1));
-            reservaACambiar.modificarMesaYFecha(mesaNueva, reservaACambiar.FechaYHora.AddHours(1));
+            _bar.ModificarReserva(reservaACambiar, reservaACambiar.FechaYHora.AddHours(1), reservaACambiar.Mesa.CubiertosUtilizados + 3);
 
-            Assert.AreEqual(5, reservaACambiar.Mesa.Cubiertos);
+            Assert.AreEqual(5, reservaACambiar.Mesa.CubiertosUtilizados);
         }
         /// <summary>
         /// Como cliente del bar quiero pedirle a un mozo que cierre mi mesa, que el mozo pida el cierre de la mesa al bar y 
@@ -108,7 +107,7 @@ namespace Practia.Bar.Model.Tests
             Mesa mesaTest = _bar.Mesas[0];
             mesaTest.MozoAsignado = _bar.Mozo[0];
             mesaTest.Cerrar(_bar);
-            Assert.Fail("Test no implementado");
+            Assert.AreEqual(EstadoMesa.Libre,mesaTest.EstadoMesa);
         }
 
         /// <summary>
@@ -118,7 +117,17 @@ namespace Practia.Bar.Model.Tests
         [TestMethod]
         public void Test_OcuparMesaReservada_OK()
         {
-            Assert.Fail("Test no implementado");
+            DateTime fecha = new DateTime(2019, 03, 02, 20, 00, 00);
+            _bar.Reservar(2, fecha, "Pablo", "22333111");
+            Reserva reservaACambiar = _bar.BuscarReserva("Pablo", fecha);
+            Mesa mesaReservada = _bar.OcuparReserva(reservaACambiar.Mesa);
+            mesaReservada.MozoAsignado = _bar.Mozo[0];
+
+            Assert.AreEqual(EstadoMesa.Ocupado, mesaReservada.EstadoMesa);
+
+            mesaReservada.Cerrar(_bar);
+
+            Assert.AreEqual(EstadoMesa.Libre, mesaReservada.EstadoMesa);
         }
 
         /// <summary>
@@ -128,7 +137,16 @@ namespace Practia.Bar.Model.Tests
         [TestMethod]
         public void Test_OcuparMesaSinReserva_OK()
         {
-            Assert.Fail("Test no implementado");
+            Mesa mesaSolicitada = _bar.ConseguirMesaDisponible(2, new DateTime().Date);
+            mesaSolicitada.Ocupar();
+
+            Assert.AreEqual(EstadoMesa.Ocupado, mesaSolicitada.EstadoMesa);
+
+            mesaSolicitada.MozoAsignado = _bar.Mozo[0];
+            mesaSolicitada.Cerrar(_bar);
+            
+            Assert.AreEqual(EstadoMesa.Libre, mesaSolicitada.EstadoMesa);
+
         }
 
         /// <summary>
@@ -141,7 +159,27 @@ namespace Practia.Bar.Model.Tests
         [TestMethod]
         public void Test_AnalizarEficienciaUsoSalon_DiaEspecifico()
         {
-            Assert.Fail("Test no implementado");
+            DateTime fechaTest = new DateTime(2012);
+            Mozo mozoTest = _bar.Mozo[0];
+            Mesa mesaTest1 = _bar.Mesas[0];
+            mesaTest1.CubiertosUtilizados = 4;
+            Mesa mesaTest2 = _bar.Mesas[1];
+            mesaTest2.CubiertosUtilizados = 3;
+            Mesa mesaTest3 = _bar.Mesas[2];
+            mesaTest3.CubiertosUtilizados = 2;
+            _bar.Facturas.Add(new Factura(fechaTest, mozoTest, mesaTest1, 10));
+            _bar.Facturas.Add(new Factura(fechaTest, mozoTest, mesaTest2, 10));
+            _bar.Facturas.Add(new Factura(fechaTest, mozoTest, mesaTest3, 10));
+            List<Factura> facturasDia = _bar.Facturas.FindAll(factura => factura.FechaFacturacion == new DateTime(2012));
+            List<Double> eficienciaDia = facturasDia.ConvertAll<Double>(factura => factura.AnalizarEficiencia());
+            Double res = 0;
+            eficienciaDia.ForEach(eficiciencia => res = +eficiciencia);
+            Assert.AreEqual(4, facturasDia[1].Mesa.Cubiertos);
+            Assert.AreEqual(3, facturasDia[1].Mesa.CubiertosUtilizados);
+            Assert.AreEqual(1, facturasDia[0].AnalizarEficiencia());
+            Assert.AreEqual((Double)3 / 4, facturasDia[1].AnalizarEficiencia());
+            Assert.AreEqual(1, facturasDia[2].AnalizarEficiencia());
+            Assert.AreEqual(2.75 / 3, res);
         }
     }
 }

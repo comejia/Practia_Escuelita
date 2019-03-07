@@ -15,6 +15,7 @@ namespace Practia.Bar.Model
 
         public Bar(List<Mesa> mesas, List<Mozo> mozos, string nombreDelBar)
         {
+            this._facturas = new List<Factura> { };
             if (mesas != null && mesas.Count > 0)
                 this._mesas = mesas;
             else
@@ -45,6 +46,10 @@ namespace Practia.Bar.Model
         {
             get { return _mozos; }
         }
+        public List<Factura> Facturas
+        {
+            get { return _facturas; }
+        }
 
 
         public Reserva Reservar(int cubiertos, DateTime fecha, string nombreCliente, string dni)
@@ -54,6 +59,7 @@ namespace Practia.Bar.Model
             if (!mesaBuscada.Equals(null))
             {
                 Reserva reservaRealizada = new Reserva(nombreCliente, fecha, mesaBuscada);
+                mesaBuscada.CubiertosUtilizados = cubiertos;
                 _reservas.Add(reservaRealizada);
 
                 return reservaRealizada;
@@ -68,20 +74,20 @@ namespace Practia.Bar.Model
 
         public Mesa ConseguirMesaDisponible(int cubiertos, DateTime fecha)
         {
-            List<Mesa> mesasDeNCubiertos = MesasDeNCubiertos(cubiertos, _mesas);
+            List<Mesa> mesasDeNCubiertos = MesasDeMinNCubiertos(cubiertos, _mesas);
 
             List<Mesa> mesasReservadasEnLaFecha = MesasReservadasEnUnaFecha(_reservas, fecha);
-            List<Mesa> mesasDeNCubiertosReservadas = MesasDeNCubiertos(cubiertos, mesasReservadasEnLaFecha);
+            List<Mesa> mesasDeNCubiertosReservadas = MesasDeMinNCubiertos(cubiertos, mesasReservadasEnLaFecha);
 
             return mesasDeNCubiertos.Find(mesa => !mesasDeNCubiertosReservadas.Contains(mesa));
         }
 
         public bool ExisteMesaDisponible(int cubiertos, DateTime fecha)
         {
-            List<Mesa> mesasDeNCubiertos = MesasDeNCubiertos(cubiertos, _mesas);
+            List<Mesa> mesasDeNCubiertos = MesasDeMinNCubiertos(cubiertos, _mesas);
 
             List<Mesa> mesasReservadasEnLaFecha = MesasReservadasEnUnaFecha(_reservas, fecha);
-            List<Mesa> MesasDeNCubiertosReservadas = MesasDeNCubiertos(cubiertos, mesasReservadasEnLaFecha);
+            List<Mesa> MesasDeNCubiertosReservadas = MesasDeMinNCubiertos(cubiertos, mesasReservadasEnLaFecha);
 
             return mesasDeNCubiertos.Count() > MesasDeNCubiertosReservadas.Count();
         }
@@ -91,9 +97,9 @@ namespace Practia.Bar.Model
             throw new System.NotImplementedException();
         }
 
-        public List<Mesa> MesasDeNCubiertos(int cantidadCubiertos, List<Mesa> Mesas)
+        public List<Mesa> MesasDeMinNCubiertos(int cantidadCubiertos, List<Mesa> Mesas)
         {
-            return Mesas.FindAll(mesa => mesa.Cubiertos == cantidadCubiertos);
+            return Mesas.FindAll(mesa => mesa.Cubiertos >= cantidadCubiertos);
         }
 
         public List<Mesa> MesasReservadasEnUnaFecha(List<Reserva> reservas, DateTime fecha)
@@ -112,7 +118,25 @@ namespace Practia.Bar.Model
         {
             Factura facturaGenerada = new Factura(new DateTime().Date, mesa.MozoAsignado, mesa, mesa.MontoActual);
             _facturas.Add(facturaGenerada);
+            mesa.EstadoMesa = EstadoMesa.Libre;
             return facturaGenerada;
+        }
+
+        public Mesa OcuparReserva (Mesa mesa)
+        {
+            Mesa mesaBuscada = _mesas.Find(m => m == mesa);
+            mesaBuscada.Ocupar();
+            return mesaBuscada;
+
+        }
+
+        public Reserva ModificarReserva(Reserva reserva, DateTime nuevaFecha, int nuevosCubiertos)
+        {
+            Mesa mesaNueva = ConseguirMesaDisponible(nuevosCubiertos, nuevaFecha);
+            mesaNueva.CubiertosUtilizados = nuevosCubiertos;
+            reserva.modificarMesaYFecha(mesaNueva, nuevaFecha);
+            
+            return reserva;
         }
 
     }

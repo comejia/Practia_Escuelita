@@ -57,7 +57,7 @@ namespace Practia.Bar.Model
 
         public double AnalizarEficiencia()
         {
-            throw new NotImplementedException();
+            return (double)((double)Mesa.CubiertosUtilizados / (double)Mesa.Cubiertos);
         }
     }
 }
