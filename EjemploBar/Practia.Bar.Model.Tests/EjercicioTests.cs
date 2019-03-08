@@ -33,7 +33,18 @@ namespace Practia.Bar.Model.Tests
         [TestMethod]
         public void Test_AnalizarEficienciaUsoSalon_Historica()
         {
-            Assert.Fail("Test no implementado");
+            Mozo mozoTest = _bar.Mozos[0];
+            Mesa mesaTest1 = _bar.Mesas[0];
+            mesaTest1.CubiertosUtilizados = 4;
+            Mesa mesaTest2 = _bar.Mesas[1];
+            mesaTest2.CubiertosUtilizados = 3;
+            Mesa mesaTest3 = _bar.Mesas[2];
+            mesaTest3.CubiertosUtilizados = 2;
+            _bar.Facturas.Add(new Factura(new DateTime(2016), mozoTest, mesaTest1, 10));
+            _bar.Facturas.Add(new Factura(new DateTime(2012), mozoTest, mesaTest2, 10));
+            _bar.Facturas.Add(new Factura(new DateTime(2013), mozoTest, mesaTest3, 10));
+
+            Assert.AreEqual(2.75/3, _bar.ObtenerEficicienciaHistorica());
         }
 
     }

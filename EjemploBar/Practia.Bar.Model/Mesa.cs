@@ -86,16 +86,23 @@ namespace Practia.Bar.Model
             set { _montoActual = value; }
         }
 
-        public void Cerrar(Bar _bar)
-        {
-            EstadoMesa = EstadoMesa.PendienteFacturacion;
-            _mozo.generarFactura(_bar, this);
-        }
-
         public void Ocupar()
         {
             EstadoMesa = EstadoMesa.Ocupado;
         }
 
+        public void Cerrar()
+        {
+            EstadoMesa = EstadoMesa.PendienteFacturacion;
+        }
+
+        public void Liberar()
+        {
+            EstadoMesa = EstadoMesa.Libre;
+            MozoAsignado = null;
+            MontoActual = 0;
+            CubiertosUtilizados = 0;
+        }
+        
     }
 }

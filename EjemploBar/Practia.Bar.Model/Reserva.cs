@@ -11,16 +11,9 @@ namespace Practia.Bar.Model
         private Cliente _cliente;
         private string _nombreReserva;
         private Mesa _mesa;
-        private int _cubiertosSolicitados;
-
+        
         // CONSTRUCTORES
-        public Reserva(string nombreReserva, DateTime fecha, Mesa mesa)
-        {
-            NombreReserva = nombreReserva;
-            FechaYHora = fecha;
-            Mesa = mesa;
-        }
-
+        
         public Reserva(Cliente cliente, DateTime fecha, Mesa mesa)
         {
             Cliente = cliente;
@@ -51,12 +44,6 @@ namespace Practia.Bar.Model
         {
             get { return _mesa; }
             set { _mesa = value; }
-        }
-
-        public int CubiertosSolicitados
-        {
-            get { return _cubiertosSolicitados; }
-            set { _cubiertosSolicitados = value; }
         }
 
         public string Detalle()

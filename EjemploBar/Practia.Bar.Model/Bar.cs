@@ -11,11 +11,12 @@ namespace Practia.Bar.Model
         private List<Mesa> _mesas;
         private List<Mozo> _mozos;
         private string _nombreBar;
-        public List<Reserva> _reservas = new List<Reserva> { };
+        public List<Reserva> _reservas;
 
         public Bar(List<Mesa> mesas, List<Mozo> mozos, string nombreDelBar)
         {
             this._facturas = new List<Factura> { };
+            this._reservas = new List<Reserva> { };
             if (mesas != null && mesas.Count > 0)
                 this._mesas = mesas;
             else
@@ -42,7 +43,7 @@ namespace Practia.Bar.Model
             get { return _mesas; }
         }
 
-        public List<Mozo> Mozo
+        public List<Mozo> Mozos
         {
             get { return _mozos; }
         }
@@ -52,24 +53,20 @@ namespace Practia.Bar.Model
         }
 
 
-        public Reserva Reservar(int cubiertos, DateTime fecha, string nombreCliente, string dni)
+        public Reserva Reservar(int cubiertos, DateTime fecha, Cliente cliente)
         {
             Mesa mesaBuscada = ConseguirMesaDisponible(cubiertos, fecha);
 
-            if (!mesaBuscada.Equals(null))
+            if (ExisteMesaDisponible(cubiertos,fecha))
             {
-                Reserva reservaRealizada = new Reserva(nombreCliente, fecha, mesaBuscada);
+                Reserva reservaRealizada = new Reserva(cliente, fecha, mesaBuscada);
                 mesaBuscada.CubiertosUtilizados = cubiertos;
                 _reservas.Add(reservaRealizada);
 
                 return reservaRealizada;
             }
             else
-            {
-                throw new System.Exception("No hay una mesa disponible con " + cubiertos.ToString() + " para la fecha " +
-                                            fecha + ".");
-            }
-
+                throw new NoHayMesasDisponibles(cubiertos, fecha);
         }
 
         public Mesa ConseguirMesaDisponible(int cubiertos, DateTime fecha)
@@ -108,26 +105,9 @@ namespace Practia.Bar.Model
             return reservasDeLaFecha.ConvertAll<Mesa>(reserva => reserva.Mesa);
         }
 
-        public Reserva BuscarReserva(string nombreReserva, DateTime fecha)
+        public Reserva BuscarReserva(Cliente cliente, DateTime fecha)
         {
-            return _reservas.Find(reserva => reserva.NombreReserva == nombreReserva &&
-                                             reserva.FechaYHora == fecha);
-        }
-
-        public Factura GenerarFactura(Mesa mesa)
-        {
-            Factura facturaGenerada = new Factura(new DateTime().Date, mesa.MozoAsignado, mesa, mesa.MontoActual);
-            _facturas.Add(facturaGenerada);
-            mesa.EstadoMesa = EstadoMesa.Libre;
-            return facturaGenerada;
-        }
-
-        public Mesa OcuparReserva (Mesa mesa)
-        {
-            Mesa mesaBuscada = _mesas.Find(m => m == mesa);
-            mesaBuscada.Ocupar();
-            return mesaBuscada;
-
+            return _reservas.Find(reserva => reserva.Cliente == cliente && reserva.FechaYHora == fecha);
         }
 
         public Reserva ModificarReserva(Reserva reserva, DateTime nuevaFecha, int nuevosCubiertos)
@@ -135,8 +115,56 @@ namespace Practia.Bar.Model
             Mesa mesaNueva = ConseguirMesaDisponible(nuevosCubiertos, nuevaFecha);
             mesaNueva.CubiertosUtilizados = nuevosCubiertos;
             reserva.modificarMesaYFecha(mesaNueva, nuevaFecha);
-            
+
             return reserva;
+        }
+
+        // Ocupar - Cerrar - Facturar Mesa
+        public Mesa OcuparMesa(Mesa mesa)
+        {
+            Mesa mesaBuscada = _mesas.Find(m => m == mesa);
+            mesaBuscada.Ocupar();
+            mesaBuscada.MozoAsignado = Mozos[0];
+            return mesaBuscada;
+        }
+
+        public Mesa CerrarMesa(Mesa mesa)
+        {
+            Factura facturaGenerada = new Factura(DateTime.Now, mesa.MozoAsignado, mesa, mesa.MontoActual);
+            _facturas.Add(facturaGenerada);
+            mesa.EstadoMesa = EstadoMesa.PendienteFacturacion;
+            return mesa;
+        }
+
+        public Mesa FacturarMesa(Mesa mesa)
+        {
+            mesa.Liberar();
+            return mesa;
+        }
+
+        public Mesa OcuparReserva (Reserva reserva)
+        {
+            return OcuparMesa(reserva.Mesa);
+        }
+
+        // Eficiciencias
+
+        public Double ObtenerEficicienciaEnDia(DateTime fecha)
+        {
+            List<Factura> facturasDia = Facturas.FindAll(factura => factura.FechaFacturacion == new DateTime(2012));
+            List<Double> eficienciaDia = facturasDia.ConvertAll<Double>(factura => factura.AnalizarEficiencia());
+            Double res = 0;
+            eficienciaDia.ForEach(eficiciencia => res += eficiciencia);
+            return res / eficienciaDia.Count;
+        }
+
+        public Double ObtenerEficicienciaHistorica()
+        {
+            List<Double> eficicienciaHistorica = Facturas.ConvertAll<Double>(factura => factura.AnalizarEficiencia());
+            Double res = 0;
+            eficicienciaHistorica.ForEach(eficiciencia => res += eficiciencia);
+
+            return res / eficicienciaHistorica.Count;
         }
 
     }

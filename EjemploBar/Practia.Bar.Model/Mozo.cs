@@ -17,10 +17,6 @@ namespace Practia.Bar.Model
             return "Mozo: " + this._nombre + " " + this._apellido;
         }
 
-        public void generarFactura(Bar bar, Mesa mesa)
-        {
-            bar.GenerarFactura(mesa);
-        }
 
         public void cobrar(Mesa mesa)
         {
