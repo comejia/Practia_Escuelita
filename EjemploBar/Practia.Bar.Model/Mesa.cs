@@ -72,7 +72,7 @@ namespace Practia.Bar.Model
                     return this._mozo;
                 else
                     //TODO: Es esta la forma mas piola de manejar al caso del mozo no asignado?
-                    throw new System.Exception("Esta mesa no tiene un mozo asignado");
+                    throw new NoHayMozoAsignado();
             }
             set
             {

@@ -47,10 +47,7 @@ namespace Practia.Bar.Model
 
         public Mesa Mesa
         {
-            get
-            {
-                return this._mesa;
-            }
+            get {return this._mesa;}
         }
 
         public DateTime FechaFacturacion { get { return this._fecha; } }

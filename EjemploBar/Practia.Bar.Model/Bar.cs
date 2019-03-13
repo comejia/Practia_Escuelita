@@ -20,18 +20,18 @@ namespace Practia.Bar.Model
             if (mesas != null && mesas.Count > 0)
                 this._mesas = mesas;
             else
-                throw new System.Exception("Al menos debe existir una mesa en la lista de mesas para poder crear al bar, un bar sin mesas no es un bar...");
+                throw new NoHayMesas();
 
             if (mozos != null && mozos.Count > 0)
                 this._mozos = mozos;
             else
-                throw new System.Exception("Al menos debe existir un mozo en la lista de mozos para poder crear al bar, un bar sin mosos dudo que funcione...");
-
+                throw new NoHayMozos();
             if (!String.IsNullOrEmpty(nombreDelBar))
                 this._nombreBar = nombreDelBar;
             else
-                throw new System.Exception("Pensas que un bar sin nombre va a tener exito? Deberias definir un nombre para tu bar...");
+                throw new NoTieneNombre();
         }
+                    
 
         public override string ToString()
         {
@@ -149,16 +149,7 @@ namespace Practia.Bar.Model
 
         // Eficiciencias
 
-        public Double ObtenerEficicienciaEnDia(DateTime fecha)
-        {
-            List<Factura> facturasDia = Facturas.FindAll(factura => factura.FechaFacturacion == new DateTime(2012));
-            List<Double> eficienciaDia = facturasDia.ConvertAll<Double>(factura => factura.AnalizarEficiencia());
-            Double res = 0;
-            eficienciaDia.ForEach(eficiciencia => res += eficiciencia);
-            return res / eficienciaDia.Count;
-        }
-
-        public Double ObtenerEficicienciaHistorica()
+        public Double ObtenerEficienciaListaFacturas(List<Factura> facturas)
         {
             List<Double> eficicienciaHistorica = Facturas.ConvertAll<Double>(factura => factura.AnalizarEficiencia());
             Double res = 0;
@@ -167,5 +158,15 @@ namespace Practia.Bar.Model
             return res / eficicienciaHistorica.Count;
         }
 
+        public Double ObtenerEficicienciaEnDia(DateTime fecha)
+        {
+            List<Factura> facturasDia = Facturas.FindAll(factura => factura.FechaFacturacion == new DateTime(2012));
+            return ObtenerEficienciaListaFacturas(facturasDia);
+        }
+
+        public Double ObtenerEficicienciaHistorica()
+        {
+            return (ObtenerEficienciaListaFacturas(_facturas));
+        }
     }
 }
