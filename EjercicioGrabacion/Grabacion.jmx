@@ -10,7 +10,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="mainPath" elementType="Argument">
             <stringProp name="Argument.name">mainPath</stringProp>
-            <stringProp name="Argument.value">C:\Users\gquispe\Documents\apache-jmeter-5.1\Projects\ClaseLunes\EjercicioGrabacion</stringProp>
+            <stringProp name="Argument.value">C:\Users\gquispe\Documents\apache-jmeter-5.1\Projects\Clase Lunes\Ejercicio Grabacion</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -27,7 +27,7 @@
           </elementProp>
           <elementProp name="results" elementType="Argument">
             <stringProp name="Argument.name">results</stringProp>
-            <stringProp name="Argument.value">${mainPath}\results\\${__time(yyyyMMdd-HHmm)}</stringProp>
+            <stringProp name="Argument.value">${mainPath}\results</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="resultsTxt" elementType="Argument">
@@ -501,7 +501,7 @@
             <stringProp name="script">id = vars.get(&quot;numberId_g1&quot;);
 dir = vars.get(&quot;results&quot;);
 log.info(id);
-f = new FileOutputStream(dir+&quot;/results.csv&quot;, true);
+f = new FileOutputStream(dir+&quot;/results.txt&quot;, true);
 p = new PrintStream(f);
 this.interpreter.setOut(p);
 print(id);
@@ -602,53 +602,8 @@ f.close();</stringProp>
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">${results}\report.txt</stringProp>
+        <stringProp name="filename">${results}\report.csv</stringProp>
       </ResultCollector>
-      <hashTree/>
-      <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseTimesOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Times Over Time" enabled="true">
-        <boolProp name="ResultCollector.error_logging">false</boolProp>
-        <objProp>
-          <name>saveConfig</name>
-          <value class="SampleSaveConfiguration">
-            <time>true</time>
-            <latency>true</latency>
-            <timestamp>true</timestamp>
-            <success>true</success>
-            <label>true</label>
-            <code>true</code>
-            <message>true</message>
-            <threadName>true</threadName>
-            <dataType>true</dataType>
-            <encoding>false</encoding>
-            <assertions>true</assertions>
-            <subresults>true</subresults>
-            <responseData>false</responseData>
-            <samplerData>false</samplerData>
-            <xml>false</xml>
-            <fieldNames>true</fieldNames>
-            <responseHeaders>false</responseHeaders>
-            <requestHeaders>false</requestHeaders>
-            <responseDataOnError>false</responseDataOnError>
-            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-            <assertionsResultsToSave>0</assertionsResultsToSave>
-            <bytes>true</bytes>
-            <sentBytes>true</sentBytes>
-            <url>true</url>
-            <threadCounts>true</threadCounts>
-            <idleTime>true</idleTime>
-            <connectTime>true</connectTime>
-          </value>
-        </objProp>
-        <stringProp name="filename"></stringProp>
-        <longProp name="interval_grouping">500</longProp>
-        <boolProp name="graph_aggregated">false</boolProp>
-        <stringProp name="include_sample_labels"></stringProp>
-        <stringProp name="exclude_sample_labels"></stringProp>
-        <stringProp name="start_offset"></stringProp>
-        <stringProp name="end_offset"></stringProp>
-        <boolProp name="include_checkbox_state">false</boolProp>
-        <boolProp name="exclude_checkbox_state">false</boolProp>
-      </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
       <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
