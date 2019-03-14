@@ -8,7 +8,7 @@
 
 ## Links de referencia
 * Junit Tests :: https://www.guru99.com/junit-tutorial.html
-* Cliente JAX-RS :: https://javaee.github.io/tutorial/jaxrs-client001.html 
+* Cliente JAX-RS :: https://javaee.github.io/tutorial/jaxrs-client001.html , https://www.logicbig.com/how-to/code-snippets/jcode-jax-rs-client-and-clientbuilder.html 
 * JSONParser :: https://www.mkyong.com/java/json-simple-example-read-and-write-json/
 * Example API :: https://jsonplaceholder.typicode.com/ 
 * Mas APIs :: https://any-api.com/ 
