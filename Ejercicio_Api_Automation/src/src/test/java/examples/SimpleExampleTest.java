@@ -39,7 +39,7 @@ public class SimpleExampleTest {
         Assert.assertEquals("1", anObject.get("id").toString());
         Assert.assertEquals("Leanne Graham", anObject.get("name"));
         Assert.assertEquals("Bret", anObject.get("username"));
-        Assert.assertEquals("Email validation failed", "ale@hotmail.com", anObject.get("email"));
+        Assert.assertEquals("Email validation failed", "Sincere@april.biz", anObject.get("email"));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class SimpleExampleTest {
         JSONObject postsList = (JSONObject) obj;
 
         //Valido condiciones esperadas
-        Assert.assertEquals("Failed post quantity validation", 200, postsList.size());
+        Assert.assertEquals("Failed post quantity validation", 4, postsList.size());
 
     }
 }
