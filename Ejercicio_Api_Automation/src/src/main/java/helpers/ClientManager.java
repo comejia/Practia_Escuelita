@@ -32,9 +32,9 @@ public class ClientManager {
         try {
             ClientBuilder builder = ClientBuilder.newBuilder();
 
-            SSLContext sslContext = getClientSSLContext();
-            builder.sslContext(sslContext);
-            builder.hostnameVerifier(getHostnameVerifier());
+            //SSLContext sslContext = getClientSSLContext();
+            //builder.sslContext(sslContext);
+            //builder.hostnameVerifier(getHostnameVerifier());
 
 
             return builder.build();
