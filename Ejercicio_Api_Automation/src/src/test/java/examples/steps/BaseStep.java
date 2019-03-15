@@ -9,6 +9,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import java.util.Map;
 
 public class BaseStep {
@@ -89,4 +91,5 @@ public class BaseStep {
     public void validateResponseCode(int expected_code){
         Assert.assertEquals(expected_code, response.getStatus());
     }
+
 }

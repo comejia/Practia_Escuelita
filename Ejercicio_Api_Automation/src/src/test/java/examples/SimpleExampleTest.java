@@ -42,6 +42,7 @@ public class SimpleExampleTest {
         Assert.assertEquals("Email validation failed", "Sincere@april.biz", anObject.get("email"));
     }
 
+
     @Test
     public void testCreateAPost() throws ParseException {
         //Defino el endopoint de la prueba
