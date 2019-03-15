@@ -19,7 +19,7 @@ public class BaseTest {
         return find(by, (20/1000), 0, true);
     }
 
-    private WebElement findElement(By by, int timeout, boolean throwException) {
+    protected WebElement findElement(By by, int timeout, boolean throwException) {
         return find(by, (timeout/1000), 0, false);
     }
 
