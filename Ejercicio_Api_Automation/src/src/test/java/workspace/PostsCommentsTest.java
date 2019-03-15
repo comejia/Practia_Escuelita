@@ -1,5 +1,6 @@
 package workspace;
 
+import helpers.ConfigHelper;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
@@ -27,7 +28,7 @@ public class PostsCommentsTest {
     @Test
     public void testGetPostId1Comments () throws ParseException{
 
-        String endpointUrl = "https://jsonplaceholder.typicode.com/posts?userId=1";
+        String endpointUrl = ConfigHelper.getPostURL()+"?userId=1";
 
         //SEND GET REQUEST
         Client client = ClientManager.getClient();
