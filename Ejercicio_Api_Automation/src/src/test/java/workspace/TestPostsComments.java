@@ -13,6 +13,22 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class TestPostsComments {
+
+    public boolean existsCommentWithID(String expectedEmail, String expectedId, JSONArray anArray)
+    {
+        boolean existePost = false;
+        for (int i=0; i<anArray.size(); i++){
+            JSONObject aPost = (JSONObject) anArray.get(i);
+            String postID = aPost.get("postId").toString();
+            String email = aPost.get("email").toString();
+
+            if (postID.equals(expectedId) && email.equals(expectedEmail)){
+                existePost = true;
+                break;
+            }
+        }
+        return existePost;
+    }
     @Test
     public void testGetCommmentsFirstPostNikita() throws ParseException {
         String endpointUrl = "https://jsonplaceholder.typicode.com/posts/1/comments";
@@ -32,18 +48,8 @@ public class TestPostsComments {
         Object arr = new JSONParser().parse(response_body);
         JSONArray anArray = (JSONArray) arr;
 
-        boolean existePost = false;
-        for (int i=0; i<anArray.size(); i++){
-            JSONObject aPost = (JSONObject) anArray.get(i);
-            String postID = aPost.get("postId").toString();
-            String email = aPost.get("email").toString();
 
-            if (postID.equals(expectedId) && email.equals(expectedEmail)){
-                existePost = true;
-                break;
-            }
-        }
-        Assert.assertTrue("Failed looking for a comment of Nikita User", existePost);
+        Assert.assertTrue("Failed looking for a comment of Nikita User", existsCommentWithID(expectedEmail, expectedId, anArray));
 
     }
 }
