@@ -1,6 +1,6 @@
 package examples;
 
-import examples.steps.UserSteps;
+import workspace.steps.UserSteps;
 import helpers.ConfigHelper;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;

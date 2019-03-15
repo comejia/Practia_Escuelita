@@ -1,21 +1,9 @@
 package workspace;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import examples.steps.UserSteps;
-import helpers.ClientManager;
+import workspace.steps.UserSteps;
 import helpers.ConfigHelper;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.json.Json;
-
-import javax.ws.rs.client.Client;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 public class UsersTest
 {
