@@ -20,7 +20,7 @@ public class UserSteps extends BaseStep {
         Assert.assertEquals("1", anObject.get("id").toString());
         Assert.assertEquals("Leanne Graham", anObject.get("name"));
         Assert.assertEquals("Bret", anObject.get("username"));
-        Assert.assertEquals("Email validation failed", "ale@hotmail.com", anObject.get("email"));
+        Assert.assertEquals("Email validation failed", "Sincere@april.biz", anObject.get("email"));
 
     }
 
