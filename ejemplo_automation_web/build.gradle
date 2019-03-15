@@ -1,0 +1,65 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.2'
+        classpath 'io.qameta.allure:allure-gradle:2.4'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'base'
+apply plugin: 'org.junit.platform.gradle.plugin'
+apply plugin: 'io.qameta.allure'
+
+group 'global.practia'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+ext.jUnit = "4.12"
+ext.selenium = "3.8.1"
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven{
+        url "http://repo.maven.apache.org/maven2"
+    }
+}
+
+dependencies {
+    compile group: 'junit', name: 'junit', version: jUnit
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: selenium
+    compile 'io.qameta.allure:allure-gradle:2.4'
+    compile group: 'javax.mail', name: 'mail', version: '1.4.1'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.4'
+    compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
+    testCompile 'io.qameta.allure:allure-gradle:2.4'
+}
+
+allure {
+    version = '2.4.1'
+    autoconfigure = true
+    aspectjweaver = true
+    aspectjVersion = '1.8.10'
+
+    useJUnit5 {
+        version = '2.0-BETA21'
+    }
+}
+
+task AllTest(type:Test){
+    systemProperties = System.properties
+    include '**/*.class'
+    filter{
+        includeTestsMatching "*.test*"
+    }
+    reports.junitXml.destination = "$buildDir/../../reports"
+    reports.html.destination = "$buildDir/../../reports"
+
+    outputs.upToDateWhen { false }
+}
+
