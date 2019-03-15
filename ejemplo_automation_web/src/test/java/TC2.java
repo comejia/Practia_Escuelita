@@ -78,8 +78,6 @@ public class TC2 extends BaseTest  {
     buttonPF.click();
 
     Assert.assertNotNull("Could not buy the flight", findElement(By.xpath("//h1[contains(text(),'Thank you')]"), 5, false));
-
-    Thread.sleep(5000);
 }
 
 }
