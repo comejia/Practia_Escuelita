@@ -57,8 +57,8 @@ task AllTest(type:Test){
     filter{
         includeTestsMatching "*.test*"
     }
-    reports.junitXml.destination = "$buildDir/../../reports"
-    reports.html.destination = "$buildDir/../../reports"
+    //reports.junitXml.destination = "$buildDir/../../reports"
+    //reports.html.destination = "$buildDir/../../reports"
 
     outputs.upToDateWhen { false }
 }
