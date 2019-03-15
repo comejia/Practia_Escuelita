@@ -1,4 +1,5 @@
 import Helpers.DriverWeb;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
@@ -11,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import example.testSteps.ExampleSteps;
 import Test.BaseTest;
 
-import java.util.List;
+import javax.print.attribute.standard.Finishings;
 import java.util.logging.Logger;
 
 public class LoginTest extends BaseTest {
@@ -86,6 +87,9 @@ public class LoginTest extends BaseTest {
         /*********** PURCHASE DATA***************/
         WebElement checkMonthAndYear = webDriver.findElement(By.xpath("//body//tr[5]//td[2]"));
         Assert.assertEquals("Failed to check month and year","04 /2039",checkMonthAndYear.getText());
+
+
+
 
     }
 
