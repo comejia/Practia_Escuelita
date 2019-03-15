@@ -24,6 +24,7 @@ public class UserSteps extends BaseStep {
 
     }
 
+    @Step("Validate that Response user data is formed as expected")
     public void validateUserData() throws ParseException
     {
         Object arrayObject = new JSONParser().parse(response_body);
@@ -39,21 +40,20 @@ public class UserSteps extends BaseStep {
         Assert.assertEquals("Failed to get users size",10, jsonArray.size());
 
         /*Validate User*/
-        Assert.assertEquals("1",user.get("id").toString());
-        Assert.assertEquals("Leanne Graham",user.get("name"));
-        Assert.assertEquals("Bret",user.get("username"));
+        Assert.assertEquals("Failed to user id", "1",user.get("id").toString());
+        Assert.assertEquals("Failed to name","Leanne Graham",user.get("name"));
+        Assert.assertEquals("Failed to user name","Bret",user.get("username"));
+        Assert.assertEquals("Failed to phone","1-770-736-8031 x56442",user.get("phone"));
+        Assert.assertEquals("Failed to website","hildegard.org",user.get("website"));
 
-        Assert.assertEquals("Kulas Light", address.get("street"));
-        Assert.assertEquals("Apt. 556", address.get("suite"));
-        Assert.assertEquals("Gwenborough", address.get("city"));
-        Assert.assertEquals("92998-3874", address.get("zipcode"));
+        Assert.assertEquals("Failed to address street","Kulas Light", address.get("street"));
+        Assert.assertEquals("Failed to address suite","Apt. 556", address.get("suite"));
+        Assert.assertEquals("Failed to address city","Gwenborough", address.get("city"));
+        Assert.assertEquals("Failed to address zipcode","92998-3874", address.get("zipcode"));
 
-        Assert.assertEquals("1-770-736-8031 x56442",user.get("phone"));
-        Assert.assertEquals("hildegard.org",user.get("website"));
-
-        Assert.assertEquals("Romaguera-Crona",company.get("name"));
-        Assert.assertEquals("Multi-layered client-server neural-net",company.get("catchPhrase"));
-        Assert.assertEquals("harness real-time e-markets",company.get("bs"));
+        Assert.assertEquals("Failed to company name","Romaguera-Crona",company.get("name"));
+        Assert.assertEquals("Failed to company catchPrase","Multi-layered client-server neural-net",company.get("catchPhrase"));
+        Assert.assertEquals("Failed to company bs","harness real-time e-markets",company.get("bs"));
 
     }
 

@@ -32,6 +32,8 @@ public class UsersTest
         UserSteps usteps = new UserSteps();
 
         usteps.getRequest(this.testMethodURL);
+        usteps.validateResponseCode(200);
+        usteps.validateResponseHeaders();
         usteps.validateUserData();
     }
 
