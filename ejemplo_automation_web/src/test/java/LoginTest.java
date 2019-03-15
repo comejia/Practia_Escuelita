@@ -13,6 +13,7 @@ import example.testSteps.ExampleSteps;
 import Test.BaseTest;
 
 import javax.print.attribute.standard.Finishings;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class LoginTest extends BaseTest {
