@@ -37,6 +37,7 @@ public class ClientManager {
             // builder.hostnameVerifier(getHostnameVerifier());
 
 
+
             return builder.build();
         }
         catch(Exception ex)
