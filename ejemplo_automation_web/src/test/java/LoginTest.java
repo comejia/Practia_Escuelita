@@ -27,12 +27,10 @@ public class LoginTest extends BaseTest {
     public void testRegisterAndLogin_OK() {
 
 
-        WebDriver webDriver = DriverWeb.getInstance();
-        webDriver.get("http://blazedemo.com/");
 
         /*----------------HOME-PAGE--------------*/
 
-        BlazeDemo_HomePage homePage = new BlazeDemo_HomePage(webDriver);
+        BlazeDemo_HomePage homePage = new BlazeDemo_HomePage();
 
         Assert.assertTrue(homePage.IsDisplayed(homePage.homeMessage));
         Assert.assertEquals(homePage.getHomeMessage(), "Welcome to the Simple Travel Agency!");
@@ -40,7 +38,7 @@ public class LoginTest extends BaseTest {
 
         /*----------------LOGIN-PAGE--------------*/
 
-        BlazeDemo_Login loginPage = new BlazeDemo_Login(webDriver);
+        BlazeDemo_Login loginPage = new BlazeDemo_Login();
 
         Assert.assertTrue(loginPage.IsDisplayed(loginPage.loginAnchor));
         Assert.assertEquals(loginPage.getLoginAnchor().getText(), "Login");
@@ -48,7 +46,7 @@ public class LoginTest extends BaseTest {
 
         /*----------------REGISTER-PAGE--------------*/
 
-        BlazeDemo_Register registerPage = new BlazeDemo_Register(webDriver);
+        BlazeDemo_Register registerPage = new BlazeDemo_Register();
 
         Assert.assertTrue(registerPage.IsDisplayed(registerPage.registerAnchor));
         Assert.assertEquals(registerPage.getRegisterAnchor(),"Register");
@@ -64,7 +62,7 @@ public class LoginTest extends BaseTest {
 
         /*----------------LOGIN-SUCCESS-PAGE--------------*/
 
-        BlazeDemo_LoginSuccess loginSuccessPage = new BlazeDemo_LoginSuccess(webDriver);
+        BlazeDemo_LoginSuccess loginSuccessPage = new BlazeDemo_LoginSuccess();
 
         Assert.assertTrue(loginSuccessPage.IsDisplayed(loginSuccessPage.successMessage));
         Assert.assertEquals(loginSuccessPage.getSuccessMessage().getText(), "You are logged in!");

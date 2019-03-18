@@ -8,39 +8,33 @@ import org.openqa.selenium.WebElement;
 
 public class BlazeDemo_Login extends WebComponent {
 
-    WebDriver driver;
-
     By registerButton = By.xpath("//*[contains(text(),'Register')]");
     By emailField = By.id("email");
     By passwordField = By.id("password");
     public By loginAnchor = By.xpath("//div[contains(text(),'Login')]");
 
-    public BlazeDemo_Login(WebDriver driver)
-    {
-        this.driver = driver;
-    }
-
     public void clickRegisterButton()
     {
-        driver.findElement(registerButton).click();
+        getDriver().findElement(registerButton).click();
     }
 
     private void setEmail(String email)
     {
-        driver.findElement(emailField).sendKeys(email);
+        getDriver().findElement(emailField).sendKeys(email);
     }
+
     private void setPassword(String password)
     {
-        driver.findElement(passwordField).sendKeys(password);
+        getDriver().findElement(passwordField).sendKeys(password);
     }
 
     public void clickLoginButton()
     {
-        driver.findElement(By.xpath("//button[contains(text(),'Login')]")).click();
+        getDriver().findElement(By.xpath("//button[contains(text(),'Login')]")).click();
     }
 
     public WebElement getLoginAnchor (){
-        return driver.findElement(loginAnchor);
+        return getDriver().findElement(loginAnchor);
     }
 
     public void loginToBlazeDemo(String email, String password)

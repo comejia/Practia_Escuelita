@@ -7,30 +7,30 @@ import example.pages.content.FlightsDestination;
 import example.pages.content.FlightsOrigin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WebDriver;
 
 public class BlazeDemo_HomePage extends WebComponent {
-    WebDriver driver;
 
-    By originChoose = By.xpath("//select[@name = 'fromPort']");
-    By destineChoose = By.xpath("//select[@name = 'toPort']");
-    By btnFindFlights = By.xpath("//body//input[@value='Find Flights']");
+    private By originChoose = By.xpath("//select[@name = 'fromPort']");
+    private By destineChoose = By.xpath("//select[@name = 'toPort']");
+    private By btnFindFlights = By.xpath("//body//input[@value='Find Flights']");
     public By homeMessage = By.xpath("//h1[contains(text(),'Welcome to the Simple Travel Agency!')]");
-    By homeButton = By.xpath("//div[@class='navbar navbar-inverse']//a[@href='home']");
+    private By homeButton = By.xpath("//div[@class='navbar navbar-inverse']//a[@href='home']");
 
-    public BlazeDemo_HomePage(WebDriver driver) {
-        this.driver = driver;
+    public BlazeDemo_HomePage()
+    {
+       getDriver().get("http://blazedemo.com/");
     }
 
     public String getHomeMessage()
     {
         //TODO: Implementar el find con espera
-        return driver.findElement(homeMessage).getText();
+        return getDriver().findElement(homeMessage).getText();
     }
+
 
     public void clickHomeButton()
     {
-        driver.findElement(homeButton).click();     //wait.until(ExpectedConditions.elementToBeClickable(...);
+         getDriver().findElement(homeButton).click();
     }
 
     /**
@@ -39,20 +39,20 @@ public class BlazeDemo_HomePage extends WebComponent {
      */
     public void setOriginChoose(FlightsOrigin origin) {
         By originBy = By.xpath("//select[@name = 'fromPort']//option[text() = '" + origin + "']");
-        driver.findElement(originChoose).click();
-        driver.findElement(originBy).click();
+        getDriver().findElement(originChoose).click();
+        getDriver().findElement(originBy).click();
     }
 
     public void setDestineChoose(FlightsDestination destination) {
         By destinationBy = By.xpath("//select[@name = 'toPort']//option[text() = '" + destination + "']");
-        driver.findElement(destineChoose).click();
-        driver.findElement(destinationBy).click();
+        getDriver().findElement(destineChoose).click();
+        getDriver().findElement(destinationBy).click();
     }
 
 
     public void clickFindFlights()
     {
-        driver.findElement(btnFindFlights).click();
+        getDriver().findElement(btnFindFlights).click();
     }
 
 
@@ -64,10 +64,8 @@ public class BlazeDemo_HomePage extends WebComponent {
     }
 
     public String getValueBtnFindFlights() {
-        return driver.findElement(btnFindFlights).getAttribute("value");
+        return getDriver().findElement(btnFindFlights).getAttribute("value");
     }
 
-    public boolean homeMessageIsDisplayed() {
-        return waitForSelectableElement(homeMessage, 20, false);
-    }
+
 }
