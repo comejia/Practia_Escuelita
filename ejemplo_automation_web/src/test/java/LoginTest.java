@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import example.testSteps.ExampleSteps;
 import Test.BaseTest;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,11 +17,8 @@ public class LoginTest extends BaseTest {
 
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(LoginTest.class));
 
-    protected ExampleSteps exampleSteps;
-
     @Before
     public void open() {
-        exampleSteps = new ExampleSteps();
     }
 
     @Test
