@@ -1,33 +1,17 @@
 package example.pages.content;
 
 public enum FlightOptions {
-    ONE {
-        public Integer toInt() {
-            return 1;
-        }
-    },
+    ONE(1),
+    TWO(2),
+    THREE(3);
 
-    TWO {
-        public Integer toInt() {
-            return 2;
-        }
-    },
+    private final int options;
 
-    THREE {
-        public Integer toInt() {
-            return 3;
-        }
-    },
+    private FlightOptions(int options){
+        this.options = options;
+    }
 
-    FOUR {
-        public Integer toInt() {
-            return 4;
-        }
-    },
-
-    FIVE {
-        public Integer toInt() {
-            return 5;
-        }
+    public int getFlightOptions(){
+        return this.options;
     }
 }

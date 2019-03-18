@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 
 public class BlazedemoReservePage extends BaseTest {
 
-    public void choseFlight(FlightOptions Opcion){
+    public void choseFlight(int Opcion){
         findElement(By.xpath("//tbody/tr["+Opcion+"]//input[@value='Choose This Flight']")).click();
     }
 }

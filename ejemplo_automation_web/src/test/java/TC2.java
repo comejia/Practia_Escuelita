@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class TC2 extends BaseTest  {
 
 @Test
-    public void test2()  throws Exception {
+public void test2()  throws Exception {
 
 
     WebDriver web = DriverWeb.getInstance();

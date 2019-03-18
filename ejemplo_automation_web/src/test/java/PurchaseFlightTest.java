@@ -11,12 +11,13 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import Test.BaseTest;
 
 public class PurchaseFlightTest extends BaseTest {
 
     @Test
-    public void tc2_purchase_flight_ok()  throws Exception {
+    public void test_purchase_flight_ok()  throws Exception {
 
     // Open Browser
     WebDriver web = DriverWeb.getInstance();
@@ -43,8 +44,7 @@ public class PurchaseFlightTest extends BaseTest {
     Assert.assertNotNull("Could not found flights", findElement(By.xpath("//h3[contains(text(),'Flights')]"), 2, false));
 
     // Push button of first flight
-    res.choseFlight(FlightOptions.ONE);
-
+    res.choseFlight(FlightOptions.ONE.getFlightOptions());
     // Go the next page
     BlazedemoPurchasePage pur = new BlazedemoPurchasePage();
 
@@ -65,5 +65,5 @@ public class PurchaseFlightTest extends BaseTest {
     Assert.assertNotNull("Could not reserve flight", findElement(By.xpath("//h1[contains(text(),'Thank you')]"), 5, false));
 
 
-}
+    }
 }
