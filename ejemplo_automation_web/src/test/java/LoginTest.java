@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import example.testSteps.ExampleSteps;
 import Test.BaseTest;
-
 import java.util.logging.Logger;
 
 public class LoginTest extends BaseTest {
@@ -26,13 +25,5 @@ public class LoginTest extends BaseTest {
         exampleSteps = new ExampleSteps();
     }
 
-    @Test
-    @Severity(SeverityLevel.MINOR)
-    @DisplayName("Example: Test case 1")
-    public void test() throws Exception
-    {
-        WebDriver webDriver = DriverWeb.getInstance();
-        webDriver.get("http://blazedemo.com/");
 
-    }
 }
