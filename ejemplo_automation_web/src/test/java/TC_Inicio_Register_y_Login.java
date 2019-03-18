@@ -1,4 +1,8 @@
 import Helpers.DriverWeb;
+import Pages.BLAZEDEMO_HomePage;
+import Pages.BLAZEDEMO_Login;
+import Pages.BLAZEDEMO_Register;
+import Pages.BLAZEDEMO_LoginSuccess;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
@@ -34,49 +38,39 @@ public class TC_Inicio_Register_y_Login extends BaseTest {
 
         WebDriver webDriver = DriverWeb.getInstance();
         webDriver.get("http://blazedemo.com/");
-        try {
+        /*try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        WebElement inicio;
-        Assert.assertNotNull(inicio = webDriver.findElement(By.xpath("//h1[contains(text(),'Welcome to the Simple Travel Agency!')]")));
-        Assert.assertEquals(inicio.getText(), "Welcome to the Simple Travel Agency!");
-
-
-        WebElement button = webDriver.findElement(By.xpath("//div[@class='navbar navbar-inverse']//a[@href='home']"));
-
-        button.click();
-        findElement(By.xpath("//*[contains(text(),'Register')]"))
-                .click();
-
-        ingresarDatos(webDriver, "name", "Usuario");
-        ingresarDatos(webDriver, "company", "compania");
-        ingresarDatos(webDriver, "email", "garlompa@server.com");
-        ingresarDatos(webDriver, "password", "123123");
-        ingresarDatos(webDriver, "password-confirm", "123123");
-
-        webDriver.findElement(By.xpath("//button[text()[contains(.,'Register')]]")).click();
+        BLAZEDEMO_HomePage homePage = new BLAZEDEMO_HomePage(webDriver);
+        BLAZEDEMO_Login loginPage = new BLAZEDEMO_Login(webDriver);
+        BLAZEDEMO_LoginSuccess loginSuccessPage = new BLAZEDEMO_LoginSuccess(webDriver);
+        BLAZEDEMO_Register registerPage = new BLAZEDEMO_Register(webDriver);
 
         WebDriverWait wait = new WebDriverWait(webDriver, 20);
 
-        WebElement loginButton;
-        Assert.assertNotNull(loginButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Login')]"))));
-        Assert.assertEquals(loginButton.getText(), "Login");
+        //Assert.assertNotNull(loginButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Login')]"))));
 
-        ingresarDatos(webDriver, "email", "garlompa@server.com");
-        ingresarDatos(webDriver, "password", "123123");
+        Assert.assertEquals(homePage.getHomeMessage().getText(), "Welcome to the Simple Travel Agency!");
 
-        webDriver.findElement(By.xpath("//button[contains(text(),'Login')]")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(homePage.homeButton())).click();
 
-        WebElement loginSuccessful;
-        Assert.assertNotNull(loginSuccessful = webDriver.findElement(By.xpath("//div[@class='panel-body'][contains(text(),'You are logged in!')]")));
-        Assert.assertEquals(loginSuccessful.getText(), "You are logged in!");
-    }
+        loginPage.clickRegisterButton();
 
-    private void ingresarDatos(WebDriver webDriver, String id, String key)
-    {
-        webDriver.findElement(By.id(id)).sendKeys(key);
+        Assert.assertEquals(registerPage.getRegisterAnchor().getText(),"Register");
+
+        registerPage.registerToBlazeDemo("Usuario", "compania", "garlompa@server.com", "123123", "123123");
+
+        registerPage.clickRegisterButton();
+
+        //Assert.assertNotNull(loginButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Login')]"))));
+        Assert.assertEquals(loginPage.getLoginAnchor().getText(), "Login");
+
+        loginPage.loginToBlazeDemo("garlompa@server.com","123123");
+
+        //Assert.assertNotNull(loginSuccessful = webDriver.findElement(By.xpath("//div[@class='panel-body'][contains(text(),'You are logged in!')]")));
+        Assert.assertEquals(loginSuccessPage.getSuccessMessage().getText(), "You are logged in!");
     }
 }
