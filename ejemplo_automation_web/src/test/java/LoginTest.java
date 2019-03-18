@@ -28,8 +28,6 @@ public class LoginTest extends BaseTest {
 
 
 
-
-
         /*----------------HOME-PAGE--------------*/
 
         BlazeDemo_HomePage homePage = new BlazeDemo_HomePage();

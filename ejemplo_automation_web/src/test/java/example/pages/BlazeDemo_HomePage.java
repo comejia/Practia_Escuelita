@@ -7,7 +7,6 @@ import example.pages.content.FlightsDestination;
 import example.pages.content.FlightsOrigin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WebDriver;
 
 public class BlazeDemo_HomePage extends WebComponent {
 
@@ -31,7 +30,7 @@ public class BlazeDemo_HomePage extends WebComponent {
 
     public void clickHomeButton()
     {
-        getDriver().findElement(homeButton).click();     //wait.until(ExpectedConditions.elementToBeClickable(...);
+         getDriver().findElement(homeButton).click();
     }
 
     /**
