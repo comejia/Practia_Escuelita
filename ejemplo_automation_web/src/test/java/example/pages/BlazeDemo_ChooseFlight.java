@@ -9,7 +9,7 @@ import java.util.List;
 
 
 
-public class BlazeDemoChooseFlight
+public class BlazeDemo_ChooseFlight
 {
     WebDriver driver;
     By titleChooseFlightPage = By.xpath("//body//h3");
@@ -18,7 +18,7 @@ public class BlazeDemoChooseFlight
      List<WebElement> listFlights;
 
 
-     public BlazeDemoChooseFlight(WebDriver driver)
+     public BlazeDemo_ChooseFlight(WebDriver driver)
      {
          this.driver = driver;
      }

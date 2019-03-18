@@ -1,11 +1,11 @@
-package Pages;
+package example.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-public class BLAZEDEMO_Login {
+public class BlazeDemo_Login {
 
     WebDriver driver;
 
@@ -14,7 +14,7 @@ public class BLAZEDEMO_Login {
     By passwordField = By.id("password");
     By loginAnchor = By.xpath("//div[contains(text(),'Login')]");
 
-    public BLAZEDEMO_Login(WebDriver driver)
+    public BlazeDemo_Login(WebDriver driver)
     {
         this.driver = driver;
     }

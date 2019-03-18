@@ -1,11 +1,11 @@
-package Pages;
+package example.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-public class BLAZEDEMO_Register {
+public class BlazeDemo_Register {
 
     WebDriver driver;
 
@@ -17,7 +17,7 @@ public class BLAZEDEMO_Register {
     By registerButton = By.xpath("//button[text()[contains(.,'Register')]]");
     By registerAnchor = By.xpath("//div[@class='panel-heading'][contains(text(), 'Register')]");
 
-    public BLAZEDEMO_Register(WebDriver driver)
+    public BlazeDemo_Register(WebDriver driver)
     {
         this.driver = driver;
     }

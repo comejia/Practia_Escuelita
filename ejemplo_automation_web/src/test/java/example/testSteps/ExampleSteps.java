@@ -3,7 +3,6 @@ package example.testSteps;
 import Steps.BaseSteps;
 import io.qameta.allure.Step;
 import static org.junit.Assert.*;
-import example.pages.ExamplePage;
 
 
 public class ExampleSteps extends BaseSteps {

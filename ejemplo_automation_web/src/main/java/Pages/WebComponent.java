@@ -174,7 +174,7 @@ public class WebComponent {
     }
 
 
-    private WebElement findElement(By by) {
+    protected WebElement findElement(By by) {
         return find(by, (MAX_WAIT_FOR_SELECTABLE/1000), 0, true);
     }
 

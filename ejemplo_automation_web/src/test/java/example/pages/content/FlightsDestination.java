@@ -1,9 +1,9 @@
 package example.pages.content;
 
-public enum FlightsDestiny {
-    BUENOSAIRES {
+public enum FlightsDestination {
+    BERLIN {
         public String toString() {
-            return "Buenos Aires";
+            return "Berlin";
         }
     },
 
