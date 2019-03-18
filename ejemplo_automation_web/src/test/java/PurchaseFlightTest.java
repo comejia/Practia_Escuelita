@@ -15,19 +15,20 @@ import Test.BaseTest;
 
 public class PurchaseFlightTest extends BaseTest {
 
-
     @Test
     public void tc2_purchase_flight_ok()  throws Exception {
 
     // Open Browser
     WebDriver web = DriverWeb.getInstance();
     web.get("http://Blazedemo.com/");
-    BlazedemoPage blaze = new BlazedemoPage();
+
+
 
     // Verify the home page
     Assert.assertNotNull("Page not found", findElement(By.xpath("//body//input[@value='Find Flights']"), 2, false));
 
 
+    BlazedemoPage blaze = new BlazedemoPage();
     // Input origin and destination
     blaze.setOrigen(FlightsOrigin.PARIS);
     blaze.setDestino(FlightsDestiny.CAIRO);
