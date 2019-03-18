@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class blazedemo_reserve extends BaseTest {
+public class BlazedemoReservePage extends BaseTest {
 
     public void foundFlights(String buscar){
 

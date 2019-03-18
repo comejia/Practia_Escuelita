@@ -1,37 +1,36 @@
 import Helpers.DriverWeb;
-import example.pages.blazedemo;
-import example.pages.blazedemo_confirmation;
-import example.pages.blazedemo_purchase;
-import example.pages.blazedemo_reserve;
-import org.junit.Assert;
+import example.pages.BlazedemoPage;
+import example.pages.BlazedemoConfirmationPage;
+import example.pages.BlazedemoPurchasePage;
+import example.pages.BlazedemoReservePage;
+import example.pages.content.FlightsDestiny;
+import example.pages.content.FlightsOrigin;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import Test.BaseTest;
 
-public class TC2_Purchase_Flight{
+public class PurchaseFlightTest {
 
 
 @Test
-    public void test2()  throws Exception {
+    public void tc2_purchase_flight_ok()  throws Exception {
 
     // Open Browser
     WebDriver web = DriverWeb.getInstance();
-    web.get("http://blazedemo.com/");
-    blazedemo blaze = new blazedemo();
+    web.get("http://BlazedemoPage.com/");
+    BlazedemoPage blaze = new BlazedemoPage();
 
     // Verify the home page
     blaze.homePage();
 
     // Input origin and destination
-    blaze.setOrigen("Paris");
-    blaze.setDestino("Cairo");
+    blaze.setOrigen(FlightsOrigin.PARIS);
+    blaze.setDestino(FlightsDestiny.CAIRO);
 
     // Push button [Find Flights]
     blaze.findFlights();
 
     // Go the next page
-    blazedemo_reserve res = new blazedemo_reserve();
+    BlazedemoReservePage res = new BlazedemoReservePage();
 
     // Verify if find flight
     res.foundFlights("Flights");
@@ -40,7 +39,7 @@ public class TC2_Purchase_Flight{
     res.choseFlight(1);
 
     // Go the next page
-    blazedemo_purchase pur = new blazedemo_purchase();
+    BlazedemoPurchasePage pur = new BlazedemoPurchasePage();
 
     // Verify if flight was reserved
     pur.reserveFlight("Your flight from Paris to Cairo has been reserved");
@@ -60,7 +59,7 @@ public class TC2_Purchase_Flight{
     pur.purchaseFlight();
 
     // Go the next page
-    blazedemo_confirmation conf = new blazedemo_confirmation();
+    BlazedemoConfirmationPage conf = new BlazedemoConfirmationPage();
 
     // Verify if flight was bought
     conf.confirFlight("Thank you");

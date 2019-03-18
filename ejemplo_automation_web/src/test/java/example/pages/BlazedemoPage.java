@@ -2,27 +2,30 @@ package example.pages;
 
 
 import Test.BaseTest;
+import example.pages.content.FlightsDestiny;
+import example.pages.content.FlightsOrigin;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class blazedemo extends BaseTest {
+public class BlazedemoPage extends BaseTest {
 
     public void homePage(){Assert.assertNotNull("Page not found", findElement(By.xpath("//body//input[@value='Find Flights']"), 2, false)); }
 
-    public void setOrigen(String Origen) {
+    public void setOrigen(FlightsOrigin origen) {
         findElement(By.xpath("//select ['fromPort']")).click();
-
-        findElement(By.xpath("//select [@name = 'fromPort'] / option[text()='"+Origen+"']")).click();
+        findElement(By.xpath("//select [@name = 'fromPort'] / option[text()='"+origen.toString()+"']")).click();
     }
 
-    public void setDestino(String Destino) {
+    public void setDestino(FlightsDestiny Destino) {
         findElement(By.xpath("//select ['toPort']")).click();
-
         findElement(By.xpath("//select [@name = 'toPort'] / option[text()='" + Destino + "']")).click();
     }
 
-    public void findFlights() {findElement(By.xpath("//body//input[@value='Find Flights']")).click(); }
+    public void findFlights() {
+        findElement(By.xpath("//body//input[@value='Find Flights']")).click();
+    }
 
 }
+
