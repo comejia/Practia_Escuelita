@@ -29,6 +29,13 @@ public class PurchaseFormData extends BaseTest {
         this._nameCard = nameCard;
     }
 
+    public PurchaseFormData(String month,String year)
+    {
+        this._month = month;
+        this._year = year;
+
+    }
+
     public String get_name() {
         return _name;
     }

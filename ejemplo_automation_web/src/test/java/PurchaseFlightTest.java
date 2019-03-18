@@ -24,7 +24,7 @@ public class PurchaseFlightTest extends BaseTest {
 
         FlightsOrigin origin = FlightsOrigin.PARIS;
         FlightsDestination destine = FlightsDestination.CAIRO;
-        int option = FlightOptions.ONE.getFlightOptions();
+        FlightOptions option = FlightOptions.ONE;
 
         homePage.setOriginChoose(origin);
         homePage.setDestineChoose(destine);
@@ -58,13 +58,15 @@ public class PurchaseFlightTest extends BaseTest {
     @DisplayName("Example: Test case 1 with POM")
     public void test_purchaseFlight_secondFlightOption_OK() throws Exception {
 
-
-
         FlightsOrigin origin = FlightsOrigin.PARIS;
         FlightsDestination destine = FlightsDestination.BERLIN;
-        int opcFlight = 2;
+        FlightOptions opcFlight = FlightOptions.TWO;
+
         String monthCard = "05";
         String yearCard = "2000";
+        PurchaseFormData client = new PurchaseFormData(monthCard,yearCard);
+
+
 
 
         /*********** HOME PAGE***************/
@@ -83,13 +85,15 @@ public class PurchaseFlightTest extends BaseTest {
         BlazeDemo_Form form;
         form = new BlazeDemo_Form();
         Assert.assertEquals("Failed to load form page", "Your flight from "+ origin +" to "+ destine +" has been reserved.", form.getTitleForm());
-        form.completeMonthAndYearCard(monthCard, yearCard);
+        form.completeMonthAndYearCard(client.get_month(), client.get_year());
 
 
+        /*********** CONFIRMATION ***************/
         BlazeDemo_ConfirmationPage confirmation;
         confirmation = new BlazeDemo_ConfirmationPage();
-        Assert.assertEquals("Failed to check month and year", monthCard +" /" + yearCard, confirmation.getCheckData());
+        Assert.assertEquals("Failed to check month and year", client.get_month() +" /" + client.get_year(), confirmation.getCheckData());
 
+        Thread.sleep(3000);
     }
 
 }

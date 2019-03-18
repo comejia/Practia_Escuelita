@@ -1,6 +1,7 @@
 package example.pages;
 
 import Pages.WebComponent;
+import example.pages.content.FlightOptions;
 import example.pages.content.FlightsOrigin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,14 +21,14 @@ public class BlazeDemo_ChooseFlight extends WebComponent
 
 
 
-    public String confirmSelectFlight(int indexFlight){
-            return getDriver().findElement(By.xpath("//tr["+indexFlight+"]/td[text() = '43']")).getText();
+    public String confirmSelectFlight(FlightOptions indexFlight){
+            return getDriver().findElement(By.xpath("//tr["+indexFlight.getFlightOptions()+"]/td[text() = '43']")).getText();
     }
 
-     public void setChooseFlight(int indexFlight)
+     public void setChooseFlight(FlightOptions indexFlight)
      {
          listFlights = getDriver().findElements(flight);
-         listFlights.get(indexFlight - 1).click();
+         listFlights.get(indexFlight.getFlightOptions() - 1).click();
      }
 
     public String getTitleChooseFlightPage() {
