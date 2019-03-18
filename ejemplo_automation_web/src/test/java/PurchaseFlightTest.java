@@ -3,24 +3,30 @@ import example.pages.BlazedemoPage;
 import example.pages.BlazedemoConfirmationPage;
 import example.pages.BlazedemoPurchasePage;
 import example.pages.BlazedemoReservePage;
+import example.pages.content.FlightOptions;
 import example.pages.content.FlightsDestiny;
 import example.pages.content.FlightsOrigin;
+import example.pages.content.PurchaseFormData;
+import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import Test.BaseTest;
 
-public class PurchaseFlightTest {
+public class PurchaseFlightTest extends BaseTest {
 
 
-@Test
+    @Test
     public void tc2_purchase_flight_ok()  throws Exception {
 
     // Open Browser
     WebDriver web = DriverWeb.getInstance();
-    web.get("http://BlazedemoPage.com/");
+    web.get("http://Blazedemo.com/");
     BlazedemoPage blaze = new BlazedemoPage();
 
     // Verify the home page
-    blaze.homePage();
+    Assert.assertNotNull("Page not found", findElement(By.xpath("//body//input[@value='Find Flights']"), 2, false));
+
 
     // Input origin and destination
     blaze.setOrigen(FlightsOrigin.PARIS);
@@ -33,27 +39,20 @@ public class PurchaseFlightTest {
     BlazedemoReservePage res = new BlazedemoReservePage();
 
     // Verify if find flight
-    res.foundFlights("Flights");
+    Assert.assertNotNull("Could not found flights", findElement(By.xpath("//h3[contains(text(),'Flights')]"), 2, false));
 
     // Push button of first flight
-    res.choseFlight(1);
+    res.choseFlight(FlightOptions.ONE);
 
     // Go the next page
     BlazedemoPurchasePage pur = new BlazedemoPurchasePage();
 
     // Verify if flight was reserved
-    pur.reserveFlight("Your flight from Paris to Cairo has been reserved");
+    Assert.assertNotNull("Could not reserve flight", findElement(By.xpath("//h2[contains(text(),'Your flight from Paris to Cairo has been reserved')]"), 5, false));
 
     // Completed form
-    pur.inputName("Cesar");
-    pur.inputAddres("Balvanera");
-    pur.inputCity("Buenos Aires");
-    pur.inputState("Buenos Aires");
-    pur.inputZip("1081");
-    pur.inputCardNum("1234567891234");
-    pur.inputMonth("11");
-    pur.inputYear("2020");
-    pur.inputNameCard("Cesar Castro");
+    PurchaseFormData client = new PurchaseFormData("Cesar", "Balvanera", "Buenos Aires", "Buenos Aires", "1081", "1234567891234", "11", "2020", "Cesar Castro");
+    pur.completeForm(client);
 
     // Push button of Purchase flight
     pur.purchaseFlight();
@@ -62,7 +61,8 @@ public class PurchaseFlightTest {
     BlazedemoConfirmationPage conf = new BlazedemoConfirmationPage();
 
     // Verify if flight was bought
-    conf.confirFlight("Thank you");
+    Assert.assertNotNull("Could not reserve flight", findElement(By.xpath("//h1[contains(text(),'Thank you')]"), 5, false));
 
-    }
+
+}
 }

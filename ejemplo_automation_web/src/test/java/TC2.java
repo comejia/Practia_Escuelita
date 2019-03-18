@@ -21,7 +21,7 @@ public class TC2 extends BaseTest  {
 
 
     WebDriver web = DriverWeb.getInstance();
-    web.get("http://BlazedemoPage.com/");
+    web.get("http://Blazedemo.com/");
 
     Assert.assertNotNull("Page not found", findElement(By.xpath("//body//input[@value='Find Flights']"), 5, false));
 

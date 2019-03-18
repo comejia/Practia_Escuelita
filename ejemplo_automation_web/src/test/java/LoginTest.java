@@ -33,8 +33,7 @@ public class LoginTest extends BaseTest {
 
 
         WebDriver webDriver = DriverWeb.getInstance();
-        webDriver.get("http://BlazedemoPage.com/");
-        Thread.sleep(3000);
+        webDriver.get("http://Blazedemo.com/");
         findElement(By.xpath("//body//input[@value='Find Flights']"));
         WebElement button = findElement(By.xpath("//body//input[@value='Find Flights']"));
         button.click();

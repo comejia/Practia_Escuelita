@@ -11,16 +11,14 @@ import org.openqa.selenium.WebElement;
 
 public class BlazedemoPage extends BaseTest {
 
-    public void homePage(){Assert.assertNotNull("Page not found", findElement(By.xpath("//body//input[@value='Find Flights']"), 2, false)); }
-
     public void setOrigen(FlightsOrigin origen) {
         findElement(By.xpath("//select ['fromPort']")).click();
         findElement(By.xpath("//select [@name = 'fromPort'] / option[text()='"+origen.toString()+"']")).click();
     }
 
-    public void setDestino(FlightsDestiny Destino) {
+    public void setDestino(FlightsDestiny destino) {
         findElement(By.xpath("//select ['toPort']")).click();
-        findElement(By.xpath("//select [@name = 'toPort'] / option[text()='" + Destino + "']")).click();
+        findElement(By.xpath("//select [@name = 'toPort'] / option[text()='" +destino + "']")).click();
     }
 
     public void findFlights() {
