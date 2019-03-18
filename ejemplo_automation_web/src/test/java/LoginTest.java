@@ -35,7 +35,7 @@ public class LoginTest extends BaseTest {
             e.printStackTrace();
         }*/
 
-        BlazeDemo_HomePage homePage = new BlazeDemo_HomePage(webDriver);
+        BlazeDemo_HomePage homePage = new BlazeDemo_HomePage();
         BlazeDemo_Login loginPage = new BlazeDemo_Login(webDriver);
         BlazeDemo_LoginSuccess loginSuccessPage = new BlazeDemo_LoginSuccess(webDriver);
         BlazeDemo_Register registerPage = new BlazeDemo_Register(webDriver);
