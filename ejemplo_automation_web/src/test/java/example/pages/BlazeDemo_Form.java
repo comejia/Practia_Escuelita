@@ -7,39 +7,31 @@ import org.openqa.selenium.WebDriver;
 
 public class BlazeDemo_Form extends WebComponent
 {
-    WebDriver driver;
      By titleForm = By.xpath("//body//h2");
      By monthCard = By.id("creditCardMonth");
      By yearCard = By.id("creditCardYear");
      By btnPurchaseFight = By.xpath("//input[@value='Purchase Flight']");
 
-     public BlazeDemo_Form(WebDriver driver)
-     {
-         this.driver = driver;
-     }
-
-
-
      public String getTitleForm()
      {
-        return driver.findElement(titleForm).getText();
+        return getDriver().findElement(titleForm).getText();
      }
 
 
      private void setMonthCard(String strMonthCard)
      {
-         driver.findElement(monthCard).clear();
-         driver.findElement(monthCard).sendKeys(strMonthCard);
+         getDriver().findElement(monthCard).clear();
+         getDriver().findElement(monthCard).sendKeys(strMonthCard);
      }
     private void setYearCard(String strYearCard)
     {
-        driver.findElement(yearCard).clear();
-        driver.findElement(yearCard).sendKeys(strYearCard);
+        getDriver().findElement(yearCard).clear();
+        getDriver().findElement(yearCard).sendKeys(strYearCard);
     }
 
     private void clickPurchaseFight()
     {
-        driver.findElement(btnPurchaseFight).click();
+        getDriver().findElement(btnPurchaseFight).click();
 
     }
 

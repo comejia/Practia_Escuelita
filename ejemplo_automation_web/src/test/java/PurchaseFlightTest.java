@@ -18,12 +18,8 @@ public class PurchaseFlightTest extends BaseTest {
     @Test
     public void test_purchaseFlight_firstFlightOption_OK()  throws Exception {
 
-        // Open Browser
-        WebDriver webDriver = DriverWeb.getInstance();
-        webDriver.get("http://Blazedemo.com/");
-
         BlazeDemo_HomePage homePage;
-        homePage = new BlazeDemo_HomePage(webDriver);
+        homePage = new BlazeDemo_HomePage();
         Assert.assertEquals("Failed to load home page", "Find Flights", homePage.getValueBtnFindFlights());
 
         FlightsOrigin origin = FlightsOrigin.PARIS;
@@ -35,7 +31,7 @@ public class PurchaseFlightTest extends BaseTest {
         homePage.clickFindFlights();
 
         //TODO: llegar al POM todos los findelement, pedirle al POM el string o el dato para el assert
-        BlazeDemo_ChooseFlight chooseFlightPage = new BlazeDemo_ChooseFlight(webDriver);
+        BlazeDemo_ChooseFlight chooseFlightPage = new BlazeDemo_ChooseFlight();
 
         Assert.assertEquals("Could not found flights","Flights from "+origin+" to "+destine+":",chooseFlightPage.getTitleChooseFlightPage());
 
@@ -43,7 +39,7 @@ public class PurchaseFlightTest extends BaseTest {
 
         chooseFlightPage.setChooseFlight(option);
 
-        BlazeDemo_Form purchasePage = new BlazeDemo_Form(webDriver);
+        BlazeDemo_Form purchasePage = new BlazeDemo_Form();
         Assert.assertEquals("Could not reserve flight","Your flight from Paris to Cairo has been reserved.",purchasePage.getTitleForm());
 
         PurchaseFormData client = new PurchaseFormData("Cesar", "Balvanera", "Buenos Aires", "Buenos Aires", "1081", "1234567891234", "11", "2020", "Cesar Castro");
@@ -51,7 +47,7 @@ public class PurchaseFlightTest extends BaseTest {
         purchasePage.purchaseFlight();
 
         // Go the next page
-        BlazeDemo_ConfirmationPage confirmationPage = new BlazeDemo_ConfirmationPage(webDriver);
+        BlazeDemo_ConfirmationPage confirmationPage = new BlazeDemo_ConfirmationPage();
 
         Assert.assertEquals("Could not buy flight","Thank you for your purchase today!",confirmationPage.getMessage());
 
@@ -62,9 +58,7 @@ public class PurchaseFlightTest extends BaseTest {
     @DisplayName("Example: Test case 1 with POM")
     public void test_purchaseFlight_secondFlightOption_OK() throws Exception {
 
-        /*******SETUP********/
-        WebDriver webDriver = DriverWeb.getInstance();
-        webDriver.get("http://blazedemo.com/");
+
 
         FlightsOrigin origin = FlightsOrigin.PARIS;
         FlightsDestination destine = FlightsDestination.BERLIN;
@@ -74,27 +68,27 @@ public class PurchaseFlightTest extends BaseTest {
 
 
         /*********** HOME PAGE***************/
-        BlazeDemo_HomePage objHomePage;
-        objHomePage = new BlazeDemo_HomePage(webDriver);
-        Assert.assertEquals("Failed to load home page", "Find Flights", objHomePage.getValueBtnFindFlights());
-        objHomePage.selectOriginAndDestine(origin, destine);
+        BlazeDemo_HomePage homePage;
+        homePage = new BlazeDemo_HomePage();
+        Assert.assertEquals("Failed to load home page", "Find Flights", homePage.getValueBtnFindFlights());
+        homePage.selectOriginAndDestine(origin, destine);
 
         /*********** CHOICE fLIGHT ***************/
-        BlazeDemo_ChooseFlight objChoseFlight;
-        objChoseFlight = new BlazeDemo_ChooseFlight(webDriver);
-        Assert.assertEquals("Failed to load flights", "Flights from "+ origin + " to " + destine +":", objChoseFlight.getTitleChooseFlightPage());
-        objChoseFlight.setChooseFlight(opcFlight);
+        BlazeDemo_ChooseFlight choseFlight;
+        choseFlight = new BlazeDemo_ChooseFlight();
+        Assert.assertEquals("Failed to load flights", "Flights from "+ origin + " to " + destine +":", choseFlight.getTitleChooseFlightPage());
+        choseFlight.setChooseFlight(opcFlight);
 
         /*********** FORM ***************/
-        BlazeDemo_Form objForm;
-        objForm = new BlazeDemo_Form(webDriver);
-        Assert.assertEquals("Failed to load form page", "Your flight from "+ origin +" to "+ destine +" has been reserved.", objForm.getTitleForm());
-        objForm.completeMonthAndYearCard(monthCard, yearCard);
+        BlazeDemo_Form form;
+        form = new BlazeDemo_Form();
+        Assert.assertEquals("Failed to load form page", "Your flight from "+ origin +" to "+ destine +" has been reserved.", form.getTitleForm());
+        form.completeMonthAndYearCard(monthCard, yearCard);
 
 
-        BlazeDemo_ConfirmationPage objData;
-        objData = new BlazeDemo_ConfirmationPage(webDriver);
-        Assert.assertEquals("Failed to check month and year", monthCard +" /" + yearCard, objData.getCheckData());
+        BlazeDemo_ConfirmationPage confirmation;
+        confirmation = new BlazeDemo_ConfirmationPage();
+        Assert.assertEquals("Failed to check month and year", monthCard +" /" + yearCard, confirmation.getCheckData());
 
     }
 

@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 
 public class BlazeDemo_Register extends WebComponent {
 
-    WebDriver driver;
-
     By nameField = By.id("name");
     By companyField = By.id("company");
     By emailField = By.id("email");
@@ -18,30 +16,25 @@ public class BlazeDemo_Register extends WebComponent {
     By registerButton = By.xpath("//button[text()[contains(.,'Register')]]");
     public By registerAnchor = By.xpath("//div[@class='panel-heading'][contains(text(), 'Register')]");
 
-    public BlazeDemo_Register(WebDriver driver)
-    {
-        this.driver = driver;
-    }
-
     public void setName(String name)
     {
-        driver.findElement(nameField).sendKeys(name);
+        getDriver().findElement(nameField).sendKeys(name);
     }
     public void setEmailField(String email)
     {
-        driver.findElement(emailField).sendKeys(email);
+        getDriver().findElement(emailField).sendKeys(email);
     }
     public void setCompanyField(String company)
     {
-        driver.findElement(companyField).sendKeys(company);
+        getDriver().findElement(companyField).sendKeys(company);
     }
     public void setPasswordField(String password)
     {
-        driver.findElement(passwordField).sendKeys(password);
+        getDriver().findElement(passwordField).sendKeys(password);
     }
     public void setConfirmPasswordField(String confirmPassword)
     {
-        driver.findElement(confirmPasswordField).sendKeys(confirmPassword);
+        getDriver().findElement(confirmPasswordField).sendKeys(confirmPassword);
     }
 
     public void registerToBlazeDemo(String name,String company,String email,String password, String confirmPassword){
@@ -54,11 +47,11 @@ public class BlazeDemo_Register extends WebComponent {
 
     public void clickRegisterButton()
     {
-        driver.findElement(registerButton).click();
+        getDriver().findElement(registerButton).click();
     }
 
     public String getRegisterAnchor()
     {
-        return driver.findElement(registerAnchor).getText();
+        return getDriver().findElement(registerAnchor).getText();
     }
 }
