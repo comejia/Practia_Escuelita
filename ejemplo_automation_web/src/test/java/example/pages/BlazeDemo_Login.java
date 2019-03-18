@@ -1,18 +1,19 @@
 package example.pages;
 
+import Pages.WebComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-public class BlazeDemo_Login {
+public class BlazeDemo_Login extends WebComponent {
 
     WebDriver driver;
 
     By registerButton = By.xpath("//*[contains(text(),'Register')]");
     By emailField = By.id("email");
     By passwordField = By.id("password");
-    By loginAnchor = By.xpath("//div[contains(text(),'Login')]");
+    public By loginAnchor = By.xpath("//div[contains(text(),'Login')]");
 
     public BlazeDemo_Login(WebDriver driver)
     {
@@ -46,6 +47,5 @@ public class BlazeDemo_Login {
     {
         this.setEmail(email);
         this.setPassword(password);
-        this.clickLoginButton();
     }
 }

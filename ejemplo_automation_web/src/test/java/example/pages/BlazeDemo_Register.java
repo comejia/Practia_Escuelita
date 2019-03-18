@@ -1,11 +1,12 @@
 package example.pages;
 
+import Pages.WebComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-public class BlazeDemo_Register {
+public class BlazeDemo_Register extends WebComponent {
 
     WebDriver driver;
 
@@ -15,7 +16,7 @@ public class BlazeDemo_Register {
     By passwordField = By.id("password");
     By confirmPasswordField = By.id("password-confirm");
     By registerButton = By.xpath("//button[text()[contains(.,'Register')]]");
-    By registerAnchor = By.xpath("//div[@class='panel-heading'][contains(text(), 'Register')]");
+    public By registerAnchor = By.xpath("//div[@class='panel-heading'][contains(text(), 'Register')]");
 
     public BlazeDemo_Register(WebDriver driver)
     {
@@ -49,7 +50,6 @@ public class BlazeDemo_Register {
         setEmailField(email);
         setPasswordField(password);
         setConfirmPasswordField(confirmPassword);
-        clickRegisterButton();
     }
 
     public void clickRegisterButton()
@@ -57,8 +57,8 @@ public class BlazeDemo_Register {
         driver.findElement(registerButton).click();
     }
 
-    public WebElement getRegisterAnchor()
+    public String getRegisterAnchor()
     {
-        return driver.findElement(registerAnchor);
+        return driver.findElement(registerAnchor).getText();
     }
 }

@@ -29,39 +29,44 @@ public class LoginTest extends BaseTest {
 
         WebDriver webDriver = DriverWeb.getInstance();
         webDriver.get("http://blazedemo.com/");
-        /*try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
+
+        /*----------------HOME-PAGE--------------*/
 
         BlazeDemo_HomePage homePage = new BlazeDemo_HomePage(webDriver);
-        BlazeDemo_Login loginPage = new BlazeDemo_Login(webDriver);
-        BlazeDemo_LoginSuccess loginSuccessPage = new BlazeDemo_LoginSuccess(webDriver);
-        BlazeDemo_Register registerPage = new BlazeDemo_Register(webDriver);
 
-        WebDriverWait wait = new WebDriverWait(webDriver, 20);
-
-        //Assert.assertNotNull(loginButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Login')]"))));
-
+        Assert.assertTrue(homePage.IsDisplayed(homePage.homeMessage));
         Assert.assertEquals(homePage.getHomeMessage(), "Welcome to the Simple Travel Agency!");
+        homePage.clickHomeButton();
 
-        wait.until(ExpectedConditions.elementToBeClickable(homePage.homeButton())).click();
+        /*----------------LOGIN-PAGE--------------*/
 
+        BlazeDemo_Login loginPage = new BlazeDemo_Login(webDriver);
+
+        Assert.assertTrue(loginPage.IsDisplayed(loginPage.loginAnchor));
+        Assert.assertEquals(loginPage.getLoginAnchor().getText(), "Login");
         loginPage.clickRegisterButton();
 
-        Assert.assertEquals(registerPage.getRegisterAnchor().getText(),"Register");
+        /*----------------REGISTER-PAGE--------------*/
 
-        registerPage.registerToBlazeDemo("Usuario", "compania", "garlompa@server.com", "123123", "123123");
+        BlazeDemo_Register registerPage = new BlazeDemo_Register(webDriver);
 
+        Assert.assertTrue(registerPage.IsDisplayed(registerPage.registerAnchor));
+        Assert.assertEquals(registerPage.getRegisterAnchor(),"Register");
+        registerPage.registerToBlazeDemo("Usuario", "compania", "usuario@server.com", "123123", "123123");
         registerPage.clickRegisterButton();
 
-        //Assert.assertNotNull(loginButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Login')]"))));
+        /*---------------BACK-TO-LOGIN-PAGE--------------*/
+
+        Assert.assertTrue(loginPage.IsDisplayed(loginPage.loginAnchor));
         Assert.assertEquals(loginPage.getLoginAnchor().getText(), "Login");
+        loginPage.loginToBlazeDemo("usuario@server.com","123123");
+        loginPage.clickLoginButton();
 
-        loginPage.loginToBlazeDemo("garlompa@server.com","123123");
+        /*----------------LOGIN-SUCCESS-PAGE--------------*/
 
-        //Assert.assertNotNull(loginSuccessful = webDriver.findElement(By.xpath("//div[@class='panel-body'][contains(text(),'You are logged in!')]")));
+        BlazeDemo_LoginSuccess loginSuccessPage = new BlazeDemo_LoginSuccess(webDriver);
+
+        Assert.assertTrue(loginSuccessPage.IsDisplayed(loginSuccessPage.successMessage));
         Assert.assertEquals(loginSuccessPage.getSuccessMessage().getText(), "You are logged in!");
     }
 }
