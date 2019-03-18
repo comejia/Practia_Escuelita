@@ -63,7 +63,6 @@ public class BlazeDemo_HomePage extends WebComponent {
         this.clickFindFlights();
     }
 
-
     public String getValueBtnFindFlights() {
         return driver.findElement(btnFindFlights).getAttribute("value");
     }

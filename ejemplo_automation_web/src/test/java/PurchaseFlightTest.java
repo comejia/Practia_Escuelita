@@ -26,14 +26,22 @@ public class PurchaseFlightTest extends BaseTest {
         homePage = new BlazeDemo_HomePage(webDriver);
         Assert.assertEquals("Failed to load home page", "Find Flights", homePage.getValueBtnFindFlights());
 
-        homePage.setOriginChoose(FlightsOrigin.PARIS);
-        homePage.setDestineChoose(FlightsDestination.CAIRO);
+        FlightsOrigin origin = FlightsOrigin.PARIS;
+        FlightsDestination destine = FlightsDestination.CAIRO;
+        int option = FlightOptions.ONE.getFlightOptions();
+
+        homePage.setOriginChoose(origin);
+        homePage.setDestineChoose(destine);
         homePage.clickFindFlights();
 
         //TODO: llegar al POM todos los findelement, pedirle al POM el string o el dato para el assert
         BlazeDemo_ChooseFlight chooseFlightPage = new BlazeDemo_ChooseFlight(webDriver);
-        Assert.assertEquals("Could not found flights","Flights from Paris to Cairo: ",chooseFlightPage.getTitleChooseFlightPage());
-        chooseFlightPage.setChooseFlight(FlightOptions.ONE.getFlightOptions());
+
+        Assert.assertEquals("Could not found flights","Flights from "+origin+" to "+destine+":",chooseFlightPage.getTitleChooseFlightPage());
+
+        Assert.assertEquals("Flight 43 Not found","43",chooseFlightPage.confirmSelectFlight(option));
+
+        chooseFlightPage.setChooseFlight(option);
 
         BlazeDemo_Form purchasePage = new BlazeDemo_Form(webDriver);
         Assert.assertEquals("Could not reserve flight","Your flight from Paris to Cairo has been reserved.",purchasePage.getTitleForm());
