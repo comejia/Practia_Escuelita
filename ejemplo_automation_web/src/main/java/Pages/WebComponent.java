@@ -3,6 +3,7 @@ package Pages;
 import Helpers.ConfigHelperWeb;
 import Helpers.DriverWeb;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.*;
 
 import java.util.logging.Level;
@@ -196,6 +197,11 @@ public class WebComponent {
             currentLap++;
             return find(by, timeouot, currentLap, throwException);
         }
+    }
+
+    public boolean IsDisplayed(By by)
+    {
+        return waitForSelectableElement(by, 20, false);
     }
 
 }

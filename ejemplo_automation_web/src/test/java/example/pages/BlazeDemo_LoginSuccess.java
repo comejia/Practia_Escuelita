@@ -1,15 +1,16 @@
 package example.pages;
 
+import Pages.WebComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-public class BlazeDemo_LoginSuccess {
+public class BlazeDemo_LoginSuccess extends WebComponent {
 
     WebDriver driver;
 
-    By successAnchor = By.xpath("//div[@class='panel-body'][contains(text(),'You are logged in!')]");
+    public By successMessage = By.xpath("//div[@class='panel-body'][contains(text(),'You are logged in!')]");
 
     public BlazeDemo_LoginSuccess(WebDriver driver)
     {
@@ -18,7 +19,7 @@ public class BlazeDemo_LoginSuccess {
 
     public WebElement getSuccessMessage()
     {
-        return driver.findElement(successAnchor);
+        return driver.findElement(successMessage);
     }
 
 }
