@@ -7,6 +7,7 @@ import example.pages.content.FlightsDestination;
 import example.pages.content.FlightsOrigin;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 public class BlazeDemo_HomePage extends WebComponent {
@@ -24,8 +25,16 @@ public class BlazeDemo_HomePage extends WebComponent {
 
     public WebElement getHomeMessage()
     {
-        //TODO: Implementar el find con espera
-        return getDriver().findElement(homeMessage);
+        return getWebElement(homeMessage);
+    }
+
+    private WebElement getWebElement(By by) {
+        try {
+            return getDriver().findElement(by);
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -36,28 +45,30 @@ public class BlazeDemo_HomePage extends WebComponent {
 
     /**
      * Set the flight destination
-     * @param origin
      */
-    public void setOriginChoose(FlightsOrigin origin) {
-        By originBy = By.xpath("//select[@name = 'fromPort']//option[text() = '" + origin + "']");
-        getDriver().findElement(originChoose).click();
-        getDriver().findElement(originBy).click();
+    public WebElement originList() {
+
+        return getWebElement(originChoose); }
+
+    public WebElement destineList() {
+        return getWebElement(destineChoose);
     }
 
-    public void setDestineChoose(FlightsDestination destination) {
-        By destinationBy = By.xpath("//select[@name = 'toPort']//option[text() = '" + destination + "']");
-        getDriver().findElement(destineChoose).click();
-        getDriver().findElement(destinationBy).click();
+    public WebElement originOption(FlightsOrigin origin){
+        return getWebElement((By.xpath("//select[@name = 'fromPort']//option[text() = '" + origin.toString() + "']")));
     }
 
+    public WebElement destineOption(FlightsDestination destination){
+        return getWebElement(By.xpath("//select[@name = 'toPort']//option[text() = '" + destination + "']"));
+    }
 
-    public void clickFindFlights()
+    public WebElement getFindFlightsButton()
     {
-        getDriver().findElement(btnFindFlights).click();
+        return getWebElement(btnFindFlights);
     }
 
     public String getValueBtnFindFlights() {
-        return getDriver().findElement(btnFindFlights).getAttribute("value");
+        return getWebElement(btnFindFlights).getAttribute("value");
     }
 
 }

@@ -1,53 +1,80 @@
-import Helpers.DriverWeb;
 import example.pages.*;
 import example.pages.content.FlightOptions;
 import example.pages.content.FlightsDestination;
 import example.pages.content.FlightsOrigin;
 import example.pages.content.PurchaseFormData;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import Test.BaseTest;
 
 public class PurchaseFlightTest extends BaseTest {
 
     // ------------------------------------ Métodos del Test ------------------------------------
-    private void HomePage_Test(FlightsOrigin origin, FlightsDestination destine) {
-        BlazeDemo_HomePage homePage;
-        homePage = new BlazeDemo_HomePage();
-        Assert.assertNotNull("Couldn't find select flight button", homePage.getHomeMessage());
-        Assert.assertEquals("Couldn't find select flight button", "Find Flights", homePage.getValueBtnFindFlights());
 
-        homePage.setOriginChoose(origin);
-        homePage.setDestineChoose(destine);
-        homePage.clickFindFlights();
+    private void HomePage_Test(FlightsOrigin origin, FlightsDestination destine) {
+
+
+
+
+    }
+
+    private void ValidateHomeIsLoaded(BlazeDemo_HomePage homePage) {
+        Assert.assertNotNull("Couldn't find home page", homePage.getHomeMessage());
+    }
+
+    private void PressFindFlightsButton(BlazeDemo_HomePage homePage) {
+        Assert.assertEquals("Couldn't find select flight button", "Find Flights", homePage.getValueBtnFindFlights());
+        homePage.getFindFlightsButton().click();
+    }
+
+    private void SelectDestinationCity(FlightsDestination destine, BlazeDemo_HomePage homePage) {
+        Assert.assertNotNull("Couldn't find destine list", homePage.destineList());
+        homePage.destineList().click();
+        Assert.assertNotNull("Couldn't find selected destine", homePage.destineOption(destine));
+        homePage.destineOption(destine).click();
+    }
+
+    private void SelectDepartureCity(FlightsOrigin origin, BlazeDemo_HomePage homePage) {
+        Assert.assertNotNull("Couldn't find origin list", homePage.originList());
+        homePage.originList().click();
+        Assert.assertNotNull("Couldn't find selected origin", homePage.originOption(origin));
+        homePage.originOption(origin).click();
     }
 
     // ------------------------------------     T E S T S     ------------------------------------
     @Test
-    public void test_purchaseFlight_firstFlightOption_OK()  throws Exception {
+    public void test_purchaseFlight_firstFlightOption_OK() throws Exception {
         // ---------------------------   Entorno del test   ----------------------------
         FlightsOrigin origin = FlightsOrigin.PARIS;
         FlightsDestination destine = FlightsDestination.CAIRO;
         FlightOptions option = FlightOptions.ONE;
+
+        BlazeDemo_HomePage homePage;
+        homePage = new BlazeDemo_HomePage();
+
         // ---------------------------   Lógica del Test   ---------------------------
+        SelectDepartureCity(origin, homePage);
+
+        SelectDestinationCity(destine, homePage);
+
+        PressFindFlightsButton(homePage);
+
+        ValidateHomeIsLoaded(homePage);
+
+
+
 
         HomePage_Test(origin, destine);
 
         BlazeDemo_ChooseFlight chooseFlightPage = new BlazeDemo_ChooseFlight();
 
-        Assert.assertEquals("Could not found flights","Flights from "+origin+" to "+destine+":",chooseFlightPage.getTitleChooseFlightPage());
+        Assert.assertEquals("Could not found flights", "Flights from " + origin + " to " + destine + ":", chooseFlightPage.getTitleChooseFlightPage().getText());
+        Assert.assertEquals("Flight 43 Not found", "43", chooseFlightPage.confirmSelectFlight(option).getText());
 
-        Assert.assertEquals("Flight 43 Not found","43",chooseFlightPage.confirmSelectFlight(option));
-
-        chooseFlightPage.setChooseFlight(option);
+        chooseFlightPage.setChooseFlight(option).click();
 
         BlazeDemo_Form purchasePage = new BlazeDemo_Form();
-        Assert.assertEquals("Could not reserve flight","Your flight from Paris to Cairo has been reserved.",purchasePage.getTitleForm());
+        Assert.assertEquals("Could not reserve flight", "Your flight from Paris to Cairo has been reserved.", purchasePage.getTitleForm());
 
         PurchaseFormData client = new PurchaseFormData("Cesar", "Balvanera", "Buenos Aires", "Buenos Aires", "1081", "1234567891234", "11", "2020", "Cesar Castro");
         purchasePage.completeForm(client);
@@ -56,47 +83,47 @@ public class PurchaseFlightTest extends BaseTest {
         // Go the next page
         BlazeDemo_ConfirmationPage confirmationPage = new BlazeDemo_ConfirmationPage();
 
-        Assert.assertEquals("Could not buy flight","Thank you for your purchase today!",confirmationPage.getMessage());
+        Assert.assertEquals("Could not buy flight", "Thank you for your purchase today!", confirmationPage.getMessage());
 
     }
-
-
-/*    @Test
-    @Severity(SeverityLevel.MINOR)
-    @DisplayName("Example: Test case 1 with POM")
-    public void test_purchaseFlight_secondFlightOption_OK() throws Exception {
-
-
-        String monthCard = "05";
-        String yearCard = "2000";
-        PurchaseFormData client = new PurchaseFormData(monthCard,yearCard);
-
-
-
-
-        *//*********** HOME PAGE***************//*
-
-
-
-
-        *//*********** CHOICE fLIGHT ***************//*
-        BlazeDemo_ChooseFlight choseFlight;
-        choseFlight = new BlazeDemo_ChooseFlight();
-        Assert.assertEquals("Failed to load flights", "Flights from "+ origin + " to " + destine +":", choseFlight.getTitleChooseFlightPage());
-        choseFlight.setChooseFlight(opcFlight);
-
-        *//*********** FORM ***************//*
-        BlazeDemo_Form form;
-        form = new BlazeDemo_Form();
-        Assert.assertEquals("Failed to load form page", "Your flight from "+ origin +" to "+ destine +" has been reserved.", form.getTitleForm());
-        form.completeMonthAndYearCard(client.get_month(), client.get_year());
-
-
-        *//*********** CONFIRMATION ***************//*
-        BlazeDemo_ConfirmationPage confirmation;
-        confirmation = new BlazeDemo_ConfirmationPage();
-        Assert.assertEquals("Failed to check month and year", client.get_month() +" /" + client.get_year(), confirmation.getCheckData());
-
-        Thread.sleep(3000);
-    }*/
 }
+
+//    //@Test
+//    @Severity(SeverityLevel.MINOR)
+//    @DisplayName("Example: Test case 1 with POM")
+//    public void test_purchaseFlight_secondFlightOption_OK() throws Exception {
+//
+//
+//        String monthCard = "05";
+//        String yearCard = "2000";
+//        PurchaseFormData client = new PurchaseFormData(monthCard,yearCard);
+//
+//
+//
+//
+//        //*********** HOME PAGE***************//
+//
+//
+//
+//
+//        //*********** CHOICE fLIGHT ***************//
+//        BlazeDemo_ChooseFlight choseFlight;
+//        choseFlight = new BlazeDemo_ChooseFlight();
+//        Assert.assertEquals("Failed to load flights", "Flights from "+ origin + " to " + destine +":", choseFlight.getTitleChooseFlightPage());
+//        choseFlight.setChooseFlight(opcFlight);
+//
+//        //*********** FORM ***************//
+//        BlazeDemo_Form form;
+//        form = new BlazeDemo_Form();
+//        Assert.assertEquals("Failed to load form page", "Your flight from "+ origin +" to "+ destine +" has been reserved.", form.getTitleForm());
+//        form.completeMonthAndYearCard(client.get_month(), client.get_year());
+//
+//
+//        //*********** CONFIRMATION ***************//
+//        BlazeDemo_ConfirmationPage confirmation;
+//        confirmation = new BlazeDemo_ConfirmationPage();
+//        Assert.assertEquals("Failed to check month and year", client.get_month() +" /" + client.get_year(), confirmation.getCheckData());
+//
+//        Thread.sleep(3000);
+//    }
+//}

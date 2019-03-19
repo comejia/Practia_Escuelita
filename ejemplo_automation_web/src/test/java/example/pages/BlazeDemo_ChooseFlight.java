@@ -21,17 +21,17 @@ public class BlazeDemo_ChooseFlight extends WebComponent
 
 
 
-    public String confirmSelectFlight(FlightOptions indexFlight){
-            return driver.findElement(By.xpath("//tr["+indexFlight.getFlightOptions()+"]/td[text() = '43']")).getText();
+    public WebElement confirmSelectFlight(FlightOptions indexFlight){
+            return driver.findElement(By.xpath("//tr["+indexFlight.getFlightOptions()+"]/td[text() = '43']"));
     }
 
-     public void setChooseFlight(FlightOptions indexFlight)
+     public WebElement setChooseFlight(FlightOptions indexFlight)
      {
          listFlights = getDriver().findElements(flight);
-         listFlights.get(indexFlight.getFlightOptions() - 1).click();
+         return listFlights.get(indexFlight.getFlightOptions() - 1);
      }
 
-    public String getTitleChooseFlightPage() {
-        return getDriver().findElement(titleChooseFlightPage).getText();
+    public WebElement getTitleChooseFlightPage() {
+        return getDriver().findElement(titleChooseFlightPage);
     }
 }
