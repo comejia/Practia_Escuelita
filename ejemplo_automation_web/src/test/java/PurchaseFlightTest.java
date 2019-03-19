@@ -3,6 +3,9 @@ import example.pages.content.FlightOptions;
 import example.pages.content.FlightsDestination;
 import example.pages.content.FlightsOrigin;
 import example.pages.content.PurchaseFormData;
+import example.steps.BlazeDemo_ChooseFlightSteps;
+import example.steps.BlazeDemo_ConfirmationSteps;
+import example.steps.BlazeDemo_FormSteps;
 import example.steps.BlazeDemo_HomeSteps;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,8 +25,6 @@ public class PurchaseFlightTest extends BaseTest {
 
         BlazeDemo_HomeSteps homeSteps = new BlazeDemo_HomeSteps();
 
-
-
         // ---------------------------   Lógica del Test   ---------------------------
         homeSteps.ValidateHomeIsLoaded();
         homeSteps.SelectDepartureCity(origin);
@@ -32,26 +33,27 @@ public class PurchaseFlightTest extends BaseTest {
 
 
 
-        BlazeDemo_ChooseFlight chooseFlightPage = new BlazeDemo_ChooseFlight();
+        BlazeDemo_ChooseFlightSteps chooseFlightPage = new BlazeDemo_ChooseFlightSteps();
 
-        Assert.assertEquals("Could not found flights", "Flights from " + origin + " to " + destine + ":", chooseFlightPage.getTitleChooseFlightPage().getText());
-        Assert.assertEquals("Flight 43 Not found", "43", chooseFlightPage.confirmSelectFlight(option).getText());
+        chooseFlightPage.VerifyChoosePageIsLoaded(origin, destine);
+        chooseFlightPage.VerifySelectedFlight(option);
+        chooseFlightPage.SelectFlightButton(option);
 
-        chooseFlightPage.setChooseFlight(option).click();
 
-        BlazeDemo_Form purchasePage = new BlazeDemo_Form();
-        Assert.assertEquals("Could not reserve flight", "Your flight from Paris to Cairo has been reserved.", purchasePage.getTitleForm());
+        BlazeDemo_FormSteps purchasePage = new BlazeDemo_FormSteps();
 
-        PurchaseFormData client = new PurchaseFormData("Cesar", "Balvanera", "Buenos Aires", "Buenos Aires", "1081", "1234567891234", "11", "2020", "Cesar Castro");
-        purchasePage.completeForm(client);
-        purchasePage.purchaseFlight();
+        purchasePage.VerifyFormPageIsLoaded(origin, destine);
+        purchasePage.CompleteFormData();
+        purchasePage.PressPurchaseFlightButton();
+
 
         // Go the next page
-        BlazeDemo_ConfirmationPage confirmationPage = new BlazeDemo_ConfirmationPage();
+        BlazeDemo_ConfirmationSteps confirmationPage = new BlazeDemo_ConfirmationSteps();
 
-        Assert.assertEquals("Could not buy flight", "Thank you for your purchase today!", confirmationPage.getMessage());
+        confirmationPage.VerifyConfirmationIsLoaded();
 
     }
+
 }
 
 //    //@Test
@@ -72,17 +74,18 @@ public class PurchaseFlightTest extends BaseTest {
 //
 //
 //
-//        //*********** CHOICE fLIGHT ***************//
-//        BlazeDemo_ChooseFlight choseFlight;
+        //*********** CHOICE fLIGHT ***************//
+//       BlazeDemo_ChooseFlight choseFlight;
 //        choseFlight = new BlazeDemo_ChooseFlight();
 //        Assert.assertEquals("Failed to load flights", "Flights from "+ origin + " to " + destine +":", choseFlight.getTitleChooseFlightPage());
 //        choseFlight.setChooseFlight(opcFlight);
-//
-//        //*********** FORM ***************//
-//        BlazeDemo_Form form;
-//        form = new BlazeDemo_Form();
-//        Assert.assertEquals("Failed to load form page", "Your flight from "+ origin +" to "+ destine +" has been reserved.", form.getTitleForm());
-//        form.completeMonthAndYearCard(client.get_month(), client.get_year());
+////
+////        //*********** FORM ***************//
+////        BlazeDemo_Form form;
+////        form = new BlazeDemo_Form();
+////
+//Assert.assertEquals("Failed to load form page", "Your flight from "+ origin +" to "+ destine +" has been reserved.", form.getTitleForm());
+////        form.completeMonthAndYearCard(client.get_month(), client.get_year());
 //
 //
 //        //*********** CONFIRMATION ***************//
