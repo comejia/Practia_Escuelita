@@ -24,32 +24,29 @@ public class PurchaseFlightTest extends BaseTest {
         FlightOptions option = FlightOptions.ONE;
 
         BlazeDemo_HomeSteps homeSteps = new BlazeDemo_HomeSteps();
+        BlazeDemo_ChooseFlightSteps chooseFlightPage = new BlazeDemo_ChooseFlightSteps();
+        BlazeDemo_FormSteps purchasePage = new BlazeDemo_FormSteps();
+        BlazeDemo_ConfirmationSteps confirmationPage = new BlazeDemo_ConfirmationSteps();
+
 
         // ---------------------------   Lógica del Test   ---------------------------
+        // Go the home page
         homeSteps.ValidateHomeIsLoaded();
         homeSteps.SelectDepartureCity(origin);
         homeSteps.SelectDestinationCity(destine);
         homeSteps.PressFindFlightsButton();
 
-
-
-        BlazeDemo_ChooseFlightSteps chooseFlightPage = new BlazeDemo_ChooseFlightSteps();
-
+        // Go the next page
         chooseFlightPage.VerifyChoosePageIsLoaded(origin, destine);
         chooseFlightPage.VerifySelectedFlight(option);
         chooseFlightPage.SelectFlightButton(option);
 
-
-        BlazeDemo_FormSteps purchasePage = new BlazeDemo_FormSteps();
-
+        // Go the next page
         purchasePage.VerifyFormPageIsLoaded(origin, destine);
         purchasePage.CompleteFormData();
         purchasePage.PressPurchaseFlightButton();
 
-
         // Go the next page
-        BlazeDemo_ConfirmationSteps confirmationPage = new BlazeDemo_ConfirmationSteps();
-
         confirmationPage.VerifyConfirmationIsLoaded();
 
     }
