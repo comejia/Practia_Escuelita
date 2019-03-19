@@ -14,8 +14,6 @@ import Test.BaseTest;
 
 public class PurchaseFlightTest extends BaseTest {
 
-
-
     // ------------------------------------     T E S T S     ------------------------------------
     @Test
     public void test_purchaseFlight_firstFlightOption_OK() throws Exception {
