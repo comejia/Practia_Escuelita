@@ -10,15 +10,6 @@ import Test.BaseTest;
 
 public class PurchaseFlightTest extends BaseTest {
 
-    // ------------------------------------ Métodos del Test ------------------------------------
-
-    private void HomePage_Test(FlightsOrigin origin, FlightsDestination destine) {
-
-
-
-
-    }
-
 
 
     // ------------------------------------     T E S T S     ------------------------------------
@@ -34,12 +25,12 @@ public class PurchaseFlightTest extends BaseTest {
 
 
         // ---------------------------   Lógica del Test   ---------------------------
+        homeSteps.ValidateHomeIsLoaded();
         homeSteps.SelectDepartureCity(origin);
         homeSteps.SelectDestinationCity(destine);
         homeSteps.PressFindFlightsButton();
-        homeSteps.ValidateHomeIsLoaded();
 
-        HomePage_Test(origin, destine);
+
 
         BlazeDemo_ChooseFlight chooseFlightPage = new BlazeDemo_ChooseFlight();
 
