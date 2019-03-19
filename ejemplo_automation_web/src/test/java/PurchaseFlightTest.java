@@ -3,6 +3,7 @@ import example.pages.content.FlightOptions;
 import example.pages.content.FlightsDestination;
 import example.pages.content.FlightsOrigin;
 import example.pages.content.PurchaseFormData;
+import example.steps.BlazeDemo_HomeSteps;
 import org.junit.Assert;
 import org.junit.Test;
 import Test.BaseTest;
@@ -18,28 +19,7 @@ public class PurchaseFlightTest extends BaseTest {
 
     }
 
-    private void ValidateHomeIsLoaded(BlazeDemo_HomePage homePage) {
-        Assert.assertNotNull("Couldn't find home page", homePage.getHomeMessage());
-    }
 
-    private void PressFindFlightsButton(BlazeDemo_HomePage homePage) {
-        Assert.assertEquals("Couldn't find select flight button", "Find Flights", homePage.getValueBtnFindFlights());
-        homePage.getFindFlightsButton().click();
-    }
-
-    private void SelectDestinationCity(FlightsDestination destine, BlazeDemo_HomePage homePage) {
-        Assert.assertNotNull("Couldn't find destine list", homePage.destineList());
-        homePage.destineList().click();
-        Assert.assertNotNull("Couldn't find selected destine", homePage.destineOption(destine));
-        homePage.destineOption(destine).click();
-    }
-
-    private void SelectDepartureCity(FlightsOrigin origin, BlazeDemo_HomePage homePage) {
-        Assert.assertNotNull("Couldn't find origin list", homePage.originList());
-        homePage.originList().click();
-        Assert.assertNotNull("Couldn't find selected origin", homePage.originOption(origin));
-        homePage.originOption(origin).click();
-    }
 
     // ------------------------------------     T E S T S     ------------------------------------
     @Test
@@ -49,20 +29,15 @@ public class PurchaseFlightTest extends BaseTest {
         FlightsDestination destine = FlightsDestination.CAIRO;
         FlightOptions option = FlightOptions.ONE;
 
-        BlazeDemo_HomePage homePage;
-        homePage = new BlazeDemo_HomePage();
+        BlazeDemo_HomeSteps homeSteps = new BlazeDemo_HomeSteps();
+
+
 
         // ---------------------------   Lógica del Test   ---------------------------
-        SelectDepartureCity(origin, homePage);
-
-        SelectDestinationCity(destine, homePage);
-
-        PressFindFlightsButton(homePage);
-
-        ValidateHomeIsLoaded(homePage);
-
-
-
+        homeSteps.SelectDepartureCity(origin);
+        homeSteps.SelectDestinationCity(destine);
+        homeSteps.PressFindFlightsButton();
+        homeSteps.ValidateHomeIsLoaded();
 
         HomePage_Test(origin, destine);
 
