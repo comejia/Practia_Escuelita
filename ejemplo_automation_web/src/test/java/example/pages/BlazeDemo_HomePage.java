@@ -5,6 +5,7 @@ package example.pages;
 import Pages.WebComponent;
 import example.pages.content.FlightsDestination;
 import example.pages.content.FlightsOrigin;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -21,10 +22,10 @@ public class BlazeDemo_HomePage extends WebComponent {
        getDriver().get("http://blazedemo.com/");
     }
 
-    public String getHomeMessage()
+    public WebElement getHomeMessage()
     {
         //TODO: Implementar el find con espera
-        return getDriver().findElement(homeMessage).getText();
+        return getDriver().findElement(homeMessage);
     }
 
 
@@ -55,17 +56,8 @@ public class BlazeDemo_HomePage extends WebComponent {
         getDriver().findElement(btnFindFlights).click();
     }
 
-
-    public void selectOriginAndDestine(FlightsOrigin origin, FlightsDestination destination)
-    {
-        this.setOriginChoose(origin);
-        this.setDestineChoose(destination);
-        this.clickFindFlights();
-    }
-
     public String getValueBtnFindFlights() {
         return getDriver().findElement(btnFindFlights).getAttribute("value");
     }
-
 
 }

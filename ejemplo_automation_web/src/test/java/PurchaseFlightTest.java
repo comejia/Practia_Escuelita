@@ -15,22 +15,29 @@ import Test.BaseTest;
 
 public class PurchaseFlightTest extends BaseTest {
 
-    @Test
-    public void test_purchaseFlight_firstFlightOption_OK()  throws Exception {
-
+    // ------------------------------------ Métodos del Test ------------------------------------
+    private void HomePage_Test(FlightsOrigin origin, FlightsDestination destine) {
         BlazeDemo_HomePage homePage;
         homePage = new BlazeDemo_HomePage();
-        Assert.assertEquals("Failed to load home page", "Find Flights", homePage.getValueBtnFindFlights());
-
-        FlightsOrigin origin = FlightsOrigin.PARIS;
-        FlightsDestination destine = FlightsDestination.CAIRO;
-        FlightOptions option = FlightOptions.ONE;
+        Assert.assertNotNull("Couldn't find select flight button", homePage.getHomeMessage());
+        Assert.assertEquals("Couldn't find select flight button", "Find Flights", homePage.getValueBtnFindFlights());
 
         homePage.setOriginChoose(origin);
         homePage.setDestineChoose(destine);
         homePage.clickFindFlights();
+    }
 
-        //TODO: llegar al POM todos los findelement, pedirle al POM el string o el dato para el assert
+    // ------------------------------------     T E S T S     ------------------------------------
+    @Test
+    public void test_purchaseFlight_firstFlightOption_OK()  throws Exception {
+        // ---------------------------   Entorno del test   ----------------------------
+        FlightsOrigin origin = FlightsOrigin.PARIS;
+        FlightsDestination destine = FlightsDestination.CAIRO;
+        FlightOptions option = FlightOptions.ONE;
+        // ---------------------------   Lógica del Test   ---------------------------
+
+        HomePage_Test(origin, destine);
+
         BlazeDemo_ChooseFlight chooseFlightPage = new BlazeDemo_ChooseFlight();
 
         Assert.assertEquals("Could not found flights","Flights from "+origin+" to "+destine+":",chooseFlightPage.getTitleChooseFlightPage());
@@ -53,14 +60,12 @@ public class PurchaseFlightTest extends BaseTest {
 
     }
 
-    @Test
+
+/*    @Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Example: Test case 1 with POM")
     public void test_purchaseFlight_secondFlightOption_OK() throws Exception {
 
-        FlightsOrigin origin = FlightsOrigin.PARIS;
-        FlightsDestination destine = FlightsDestination.BERLIN;
-        FlightOptions opcFlight = FlightOptions.TWO;
 
         String monthCard = "05";
         String yearCard = "2000";
@@ -69,31 +74,29 @@ public class PurchaseFlightTest extends BaseTest {
 
 
 
-        /*********** HOME PAGE***************/
-        BlazeDemo_HomePage homePage;
-        homePage = new BlazeDemo_HomePage();
-        Assert.assertEquals("Failed to load home page", "Find Flights", homePage.getValueBtnFindFlights());
-        homePage.selectOriginAndDestine(origin, destine);
+        *//*********** HOME PAGE***************//*
 
-        /*********** CHOICE fLIGHT ***************/
+
+
+
+        *//*********** CHOICE fLIGHT ***************//*
         BlazeDemo_ChooseFlight choseFlight;
         choseFlight = new BlazeDemo_ChooseFlight();
         Assert.assertEquals("Failed to load flights", "Flights from "+ origin + " to " + destine +":", choseFlight.getTitleChooseFlightPage());
         choseFlight.setChooseFlight(opcFlight);
 
-        /*********** FORM ***************/
+        *//*********** FORM ***************//*
         BlazeDemo_Form form;
         form = new BlazeDemo_Form();
         Assert.assertEquals("Failed to load form page", "Your flight from "+ origin +" to "+ destine +" has been reserved.", form.getTitleForm());
         form.completeMonthAndYearCard(client.get_month(), client.get_year());
 
 
-        /*********** CONFIRMATION ***************/
+        *//*********** CONFIRMATION ***************//*
         BlazeDemo_ConfirmationPage confirmation;
         confirmation = new BlazeDemo_ConfirmationPage();
         Assert.assertEquals("Failed to check month and year", client.get_month() +" /" + client.get_year(), confirmation.getCheckData());
 
         Thread.sleep(3000);
-    }
-
+    }*/
 }
