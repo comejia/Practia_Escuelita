@@ -7,6 +7,7 @@ import example.steps.BlazeDemo_ChooseFlightSteps;
 import example.steps.BlazeDemo_ConfirmationSteps;
 import example.steps.BlazeDemo_FormSteps;
 import example.steps.BlazeDemo_HomeSteps;
+import io.qameta.allure.Severity;
 import org.junit.Assert;
 import org.junit.Test;
 import Test.BaseTest;
@@ -23,10 +24,12 @@ public class PurchaseFlightTest extends BaseTest {
         FlightsDestination destine = FlightsDestination.CAIRO;
         FlightOptions option = FlightOptions.ONE;
 
+        PurchaseFormData client = new PurchaseFormData("Cesar", "Balvanera", "Buenos Aires", "Buenos Aires", "1081", "1234567891234", "11", "2020", "Cesar Castro");
+
         BlazeDemo_HomeSteps homeSteps = new BlazeDemo_HomeSteps();
-        BlazeDemo_ChooseFlightSteps chooseFlightPage = new BlazeDemo_ChooseFlightSteps();
-        BlazeDemo_FormSteps purchasePage = new BlazeDemo_FormSteps();
-        BlazeDemo_ConfirmationSteps confirmationPage = new BlazeDemo_ConfirmationSteps();
+        BlazeDemo_ChooseFlightSteps chooseFlightSteps = new BlazeDemo_ChooseFlightSteps();
+        BlazeDemo_FormSteps formSteps = new BlazeDemo_FormSteps();
+        BlazeDemo_ConfirmationSteps confirmationSteps = new BlazeDemo_ConfirmationSteps();
 
 
         // ---------------------------   Lógica del Test   ---------------------------
@@ -37,59 +40,53 @@ public class PurchaseFlightTest extends BaseTest {
         homeSteps.PressFindFlightsButton();
 
         // Go the next page
-        chooseFlightPage.VerifyChoosePageIsLoaded(origin, destine);
-        chooseFlightPage.VerifySelectedFlight(option);
-        chooseFlightPage.SelectFlightButton(option);
+        chooseFlightSteps.VerifyChoosePageIsLoaded(origin, destine);
+        chooseFlightSteps.VerifySelectedFlight(option);
+        chooseFlightSteps.SelectFlightButton(option);
 
         // Go the next page
-        purchasePage.VerifyFormPageIsLoaded(origin, destine);
-        purchasePage.CompleteFormData();
-        purchasePage.PressPurchaseFlightButton();
+        formSteps.VerifyFormPageIsLoaded(origin, destine);
+        formSteps.CompleteFormData(client);
+        formSteps.PressPurchaseFlightButton();
 
         // Go the next page
-        confirmationPage.VerifyConfirmationIsLoaded();
+        confirmationSteps.VerifyConfirmationIsLoaded();
 
     }
 
-}
 
-//    //@Test
-//    @Severity(SeverityLevel.MINOR)
-//    @DisplayName("Example: Test case 1 with POM")
-//    public void test_purchaseFlight_secondFlightOption_OK() throws Exception {
-//
-//
-//        String monthCard = "05";
-//        String yearCard = "2000";
-//        PurchaseFormData client = new PurchaseFormData(monthCard,yearCard);
-//
-//
-//
-//
-//        //*********** HOME PAGE***************//
-//
-//
-//
-//
-        //*********** CHOICE fLIGHT ***************//
-//       BlazeDemo_ChooseFlight choseFlight;
-//        choseFlight = new BlazeDemo_ChooseFlight();
-//        Assert.assertEquals("Failed to load flights", "Flights from "+ origin + " to " + destine +":", choseFlight.getTitleChooseFlightPage());
-//        choseFlight.setChooseFlight(opcFlight);
-////
-////        //*********** FORM ***************//
-////        BlazeDemo_Form form;
-////        form = new BlazeDemo_Form();
-////
-//Assert.assertEquals("Failed to load form page", "Your flight from "+ origin +" to "+ destine +" has been reserved.", form.getTitleForm());
-////        form.completeMonthAndYearCard(client.get_month(), client.get_year());
-//
-//
-//        //*********** CONFIRMATION ***************//
-//        BlazeDemo_ConfirmationPage confirmation;
-//        confirmation = new BlazeDemo_ConfirmationPage();
-//        Assert.assertEquals("Failed to check month and year", client.get_month() +" /" + client.get_year(), confirmation.getCheckData());
-//
-//        Thread.sleep(3000);
-//    }
-//}
+    @Test
+    //@Severity(SeverityLevel)
+    //@DisplayName("Example: Test case 1 with POM")
+    public void test_purchaseFlight_secondFlightOption_OK() {
+        // ---------------------------   Entorno del test   ----------------------------
+        FlightsOrigin origin = FlightsOrigin.PARIS;
+        FlightsDestination destine = FlightsDestination.BERLIN;
+        FlightOptions option = FlightOptions.TWO;
+        PurchaseFormData client = new PurchaseFormData("04","2050");
+
+        BlazeDemo_HomeSteps homeSteps = new BlazeDemo_HomeSteps();
+        BlazeDemo_ChooseFlightSteps chooseFlightSteps = new BlazeDemo_ChooseFlightSteps();
+        BlazeDemo_FormSteps formSteps = new BlazeDemo_FormSteps();
+        BlazeDemo_ConfirmationSteps confirmationSteps = new BlazeDemo_ConfirmationSteps();
+
+        // ---------------------------   Lógica del HomeTest   ---------------------------
+        homeSteps.ValidateHomeIsLoaded();
+        homeSteps.SelectDepartureCity(origin);
+        homeSteps.SelectDestinationCity(destine);
+        homeSteps.PressFindFlightsButton();
+
+        // Go the next page
+        chooseFlightSteps.VerifyChoosePageIsLoaded(origin, destine);
+        chooseFlightSteps.VerifySelectedFlight(option);
+        chooseFlightSteps.SelectFlightButton(option);
+
+        // Go the next page
+        formSteps.VerifyFormPageIsLoaded(origin, destine);
+        formSteps.CompleteCardData(client);
+        formSteps.PressPurchaseFlightButton();
+
+        // Go the next page
+        confirmationSteps.VerifyCardData(client);
+    }
+}

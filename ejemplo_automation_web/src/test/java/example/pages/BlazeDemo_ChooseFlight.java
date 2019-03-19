@@ -22,7 +22,7 @@ public class BlazeDemo_ChooseFlight extends WebComponent
 
 
     public WebElement confirmSelectFlight(FlightOptions indexFlight){
-            return driver.findElement(By.xpath("//tr["+indexFlight.getFlightOptions()+"]/td[text() = '43']"));
+            return driver.findElement(By.xpath("//tr["+indexFlight.getFlightOptions()+"]/td[text() = '"+indexFlight.getIdFlight()+"']"));
     }
 
      public WebElement setChooseFlight(FlightOptions indexFlight)

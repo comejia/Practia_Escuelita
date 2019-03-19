@@ -20,7 +20,7 @@ public class BlazeDemo_ChooseFlightSteps {
     }
 
     public void VerifySelectedFlight(FlightOptions option) {
-        Assert.assertEquals("Flight 43 Not found", "43", choosePage.confirmSelectFlight(option).getText());
+        Assert.assertEquals("Flight Not found", option.getIdFlight(), choosePage.confirmSelectFlight(option).getText());
     }
 
     public void SelectFlightButton(FlightOptions option) {

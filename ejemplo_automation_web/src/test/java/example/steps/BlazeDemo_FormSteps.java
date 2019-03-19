@@ -18,11 +18,13 @@ public class BlazeDemo_FormSteps {
     }
 
 
-    public void CompleteFormData( ) {
-        PurchaseFormData client = new PurchaseFormData("Cesar", "Balvanera", "Buenos Aires", "Buenos Aires", "1081", "1234567891234", "11", "2020", "Cesar Castro");
-
+    public void CompleteFormData(PurchaseFormData client ) {
         formPage.completeForm(client);
     }
+    public void CompleteCardData(PurchaseFormData client ) {
+        formPage.completeCardForm(client);
+    }
+
 
     public void PressPurchaseFlightButton( ) {
         formPage.purchaseFlight();

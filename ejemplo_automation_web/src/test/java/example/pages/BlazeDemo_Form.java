@@ -57,6 +57,11 @@ public class BlazeDemo_Form extends WebComponent
 
     }
 
+    public void completeCardForm(PurchaseFormData data) {
+         setMonthCard(data.get_month());
+         setYearCard(data.get_year());
+    }
+
     public void purchaseFlight() {
         findElement(By.xpath("//body//input[@value='Purchase Flight']")).click();
     }
