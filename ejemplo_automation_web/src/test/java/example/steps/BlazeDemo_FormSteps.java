@@ -15,23 +15,27 @@ public class BlazeDemo_FormSteps {
     }
 
     @Step("Verify form is load")
-    public void VerifyFormPageIsLoaded(FlightsOrigin origin, FlightsDestination destine) {
+    public BlazeDemo_FormSteps VerifyFormPageIsLoaded(FlightsOrigin origin, FlightsDestination destine) {
         Assert.assertEquals("Failed to load form page", "Your flight from "+ origin +" to "+ destine +" has been reserved.", formPage.getTitleForm());
+        return this;
     }
 
     @Step("Complete form data")
-    public void CompleteFormData(PurchaseFormData client ) {
+    public BlazeDemo_FormSteps CompleteFormData(PurchaseFormData client ) {
         formPage.completeForm(client);
+        return this;
     }
     @Step("Complete card data")
-    public void CompleteCardData(PurchaseFormData client ) {
+    public BlazeDemo_FormSteps CompleteCardData(PurchaseFormData client ) {
         formPage.completeCardForm(client);
+        return this;
     }
 
 
     @Step("Purchase flight button")
-    public void PressPurchaseFlightButton( ) {
+    public BlazeDemo_FormSteps PressPurchaseFlightButton( ) {
         formPage.purchaseFlight();
+        return this;
     }
 
 

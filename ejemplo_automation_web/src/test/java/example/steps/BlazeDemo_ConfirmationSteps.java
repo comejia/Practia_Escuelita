@@ -14,13 +14,15 @@ public class BlazeDemo_ConfirmationSteps {
     }
 
     @Step("Verify confirmation")
-    public void VerifyConfirmationIsLoaded() {
+    public BlazeDemo_ConfirmationSteps VerifyConfirmationIsLoaded() {
         Assert.assertEquals("Could not buy flight", "Thank you for your purchase today!", confirmationPage.getMessage());
+        return this;
     }
 
     @Step("Verify card data")
-    public void VerifyCardData(PurchaseFormData client) {
+    public BlazeDemo_ConfirmationSteps VerifyCardData(PurchaseFormData client) {
         Assert.assertEquals("Failed to check month and year", client.get_month() +" /" + client.get_year(), confirmationPage.getCheckData());
+        return this;
 
     }
 

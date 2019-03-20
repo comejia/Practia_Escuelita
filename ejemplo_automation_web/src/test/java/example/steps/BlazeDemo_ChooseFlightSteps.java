@@ -16,17 +16,20 @@ public class BlazeDemo_ChooseFlightSteps {
     }
 
     @Step("Verify choose page is load")
-    public void VerifyChoosePageIsLoaded(FlightsOrigin origin, FlightsDestination destine) {
+    public BlazeDemo_ChooseFlightSteps VerifyChoosePageIsLoaded(FlightsOrigin origin, FlightsDestination destine) {
         Assert.assertEquals("Could not found flights", "Flights from " + origin + " to " + destine + ":", choosePage.getTitleChooseFlightPage().getText());
+        return this;
     }
 
     @Step("Verify selected flight")
-    public void VerifySelectedFlight(FlightOptions option) {
+    public BlazeDemo_ChooseFlightSteps VerifySelectedFlight(FlightOptions option) {
         Assert.assertEquals("Flight Not found", option.getIdFlight(), choosePage.confirmSelectFlight(option).getText());
+        return this;
     }
 
     @Step("Select flight")
-    public void SelectFlightButton(FlightOptions option) {
+    public BlazeDemo_ChooseFlightSteps SelectFlightButton(FlightOptions option) {
         choosePage.setChooseFlight(option).click();
+        return this;
     }
 }

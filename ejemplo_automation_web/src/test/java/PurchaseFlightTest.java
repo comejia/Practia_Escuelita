@@ -32,20 +32,20 @@ public class PurchaseFlightTest extends BaseTest {
 
         // ---------------------------   Lógica del Test   ---------------------------
         // Go the home page
-        homeSteps.ValidateHomeIsLoaded();
-        homeSteps.SelectDepartureCity(origin);
-        homeSteps.SelectDestinationCity(destine);
-        homeSteps.PressFindFlightsButton();
+        homeSteps.ValidateHomeIsLoaded()
+                .SelectDepartureCity(origin)
+                .SelectDestinationCity(destine)
+                .PressFindFlightsButton();
 
         // Go the next page
-        chooseFlightSteps.VerifyChoosePageIsLoaded(origin, destine);
-        chooseFlightSteps.VerifySelectedFlight(option);
-        chooseFlightSteps.SelectFlightButton(option);
+        chooseFlightSteps.VerifyChoosePageIsLoaded(origin, destine)
+                .VerifySelectedFlight(option)
+                .SelectFlightButton(option);
 
         // Go the next page
-        formSteps.VerifyFormPageIsLoaded(origin, destine);
-        formSteps.CompleteFormData(client);
-        formSteps.PressPurchaseFlightButton();
+        formSteps.VerifyFormPageIsLoaded(origin, destine)
+                .CompleteFormData(client)
+                .PressPurchaseFlightButton();
 
         // Go the next page
         confirmationSteps.VerifyConfirmationIsLoaded();
@@ -69,20 +69,20 @@ public class PurchaseFlightTest extends BaseTest {
         BlazeDemo_ConfirmationSteps confirmationSteps = new BlazeDemo_ConfirmationSteps();
 
         // ---------------------------   Lógica del HomeTest   ---------------------------
-        homeSteps.ValidateHomeIsLoaded();
-        homeSteps.SelectDepartureCity(origin);
-        homeSteps.SelectDestinationCity(destine);
-        homeSteps.PressFindFlightsButton();
+        homeSteps.ValidateHomeIsLoaded()
+                .SelectDepartureCity(origin)
+                .SelectDestinationCity(destine)
+                .PressFindFlightsButton();
 
         // Go the next page
-        chooseFlightSteps.VerifyChoosePageIsLoaded(origin, destine);
-        chooseFlightSteps.VerifySelectedFlight(option);
-        chooseFlightSteps.SelectFlightButton(option);
+        chooseFlightSteps.VerifyChoosePageIsLoaded(origin, destine)
+                .VerifySelectedFlight(option)
+                .SelectFlightButton(option);
 
         // Go the next page
-        formSteps.VerifyFormPageIsLoaded(origin, destine);
-        formSteps.CompleteCardData(client);
-        formSteps.PressPurchaseFlightButton();
+        formSteps.VerifyFormPageIsLoaded(origin, destine)
+                .CompleteCardData(client)
+                .PressPurchaseFlightButton();
 
         // Go the next page
         confirmationSteps.VerifyCardData(client);
