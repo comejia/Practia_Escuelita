@@ -7,7 +7,7 @@
 /src/.settings/
 /src/build/
 /src/out/
-./out/*
+./out/
 ./SeleniumDrivers/
 
 # Ignore Gradle GUI config
