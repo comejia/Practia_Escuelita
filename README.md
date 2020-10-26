@@ -1,2 +1,7 @@
-# Practia_Escuelita
-Uso de herramientas de automation
+# Practia escuelita
+
+Uso de distintas herramientas para automation:
+
+* Apis
+* Web
+* Performance
