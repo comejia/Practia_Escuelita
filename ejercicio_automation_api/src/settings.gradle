@@ -1,0 +1,14 @@
+rootProject.name = 'api-compliance-testing'
+
+assignProperty('baseApiURL','https://jsonplaceholder.typicode.com/')
+assignProperty('endpointEnding_GetUserURL','users/')
+assignProperty('endpointEnding_GetPostURL','posts/')
+
+assignProperty('timeout' ,'25')
+
+
+def assignProperty(String key, Object defaultValue){
+    if(System.getProperty(key) == null){
+        System.setProperty(key, defaultValue)
+    }
+}

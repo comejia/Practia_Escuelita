@@ -1,0 +1,20 @@
+rootProject.name = 'project'
+
+// Web
+//assignProperty('browserName', 'firefox')
+assignProperty('browserName', 'chrome')
+
+assignProperty('appDefaultWait', '60')
+
+assignProperty('testFilesPath','\\testFiles')
+
+assignProperty('firefoxDriverName','geckodriver')
+assignProperty('chromeDriverName','chromedriver')
+assignProperty('driverFolderBase','SeleniumDrivers')
+
+
+def assignProperty(String key, Object defaultValue){
+    if(System.getProperty(key) == null){
+        System.setProperty(key, defaultValue)
+    }
+}

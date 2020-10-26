@@ -1,0 +1,86 @@
+group 'test-project'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven{
+        url "http://repo.maven.apache.org/maven2"
+    }
+}
+
+ext.junitVersion = '4.12'
+ext.seleniumVersion = '3.8.1'
+ext.appiumVersion = '6.0.0-BETA2' //'5.0.4'
+ext.allureVersion = '2.6.0'
+ext.aspectjVersion = '1.8.12'
+ext.allureJUnit4Version = '2.0-BETA10'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.5"
+    }
+}
+
+apply plugin: 'io.qameta.allure'
+
+allure {
+    version = allureVersion
+    autoconfigure = true
+    aspectjweaver = true
+    //reportDir = new File("$buildDir/../../report-somewhere-else")
+    //resultsDir = new File("$buildDir/../../results-are-here")
+    useJUnit4 {
+        version = allureJUnit4Version
+    }
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://maven.eveoh.nl/content/repositories/releases"
+        }
+    }
+
+    dependencies {
+        classpath "nl.eveoh:gradle-aspectj:2.0"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'aspectj'
+
+dependencies {
+    compile group: 'junit', name: 'junit', version:junitVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version: seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: seleniumVersion
+    compile group: 'com.google.guava', name: 'guava', version: '23.6-jre'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-sqs', version: '1.11.281'
+    compile group: 'org.json', name:'json', version: '20180130'
+    compile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.12'
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.12'
+
+    compile 'com.opencsv:opencsv:4.3.2'
+    compile 'pl.pragmatists:JUnitParams:1.1.1'
+}
+
+task AllTest(type:Test){
+    systemProperties = System.properties
+    include '**/*.class'
+    filter{
+        includeTestsMatching "*.test*"
+    }
+    reports.junitXml.destination = "$buildDir/../../reports"
+    reports.html.destination = "$buildDir/../../reports"
+}
+
